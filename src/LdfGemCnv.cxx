@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.4 2004/08/18 20:34:57 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.5 2005/01/04 20:36:29 heather Exp $
 //
 // Description:
 //      LdfGemCnv is the concrete converter for the event header on the TDS /Event
@@ -43,8 +43,14 @@ StatusCode LdfGemCnv::createObj(IOpaqueAddress* ,
         ldfGem.calHEvector(), ldfGem.cnoVector(), ldfGem.conditionSummary(), tdsTileList);
     LdfEvent::GemOnePpsTime ppsTime(ldfGem.onePpsTime().timebase(),
         ldfGem.onePpsTime().seconds());
-    gem->initSummary(ldfGem.liveTime(), ldfGem.prescaled(), ldfGem.discarded(),
-        ldfGem.sent(), ldfGem.triggerTime(), ppsTime, ldfGem.deltaEventTime());
+
+    LdfEvent::GemDataCondArrivalTime condArr;
+    condArr.init(ldfGem.condArrTime().condArr());
+    gem->initSummary(ldfGem.liveTime(), ldfGem.prescaled(),
+            ldfGem.discarded(), condArr,
+            ldfGem.triggerTime(), ppsTime, ldfGem.deltaEventTime(), ldfGem.deltaWindowOpenTime());
+   
+
     return StatusCode::SUCCESS;
 }
 
