@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.5 2004/06/22 00:27:13 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.6 2004/06/23 18:08:27 heather Exp $
 // 
 // Description:
 
@@ -291,7 +291,7 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
             // Check marker to see if this is a data event
             unsigned int summary = ldfReader::LatData::instance()->summaryData().summary();
             unsigned marker = EventSummary::marker(summary);
-            log << MSG::INFO << "Marker = " << marker << endreq;
+            log << MSG::DEBUG << "Marker = " << marker << endreq;
             if (marker == 0) DONE = true;
             if (marker != 0) {
               // Move file pointer for the next event
