@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.2 2004/08/25 22:42:17 heather Exp $
 //
 // Description:
 //      LdfEventSummaryCnv is the concrete converter for the event header on the TDS /Event
@@ -37,6 +37,23 @@ StatusCode LdfEventSummaryCnv::createObj(IOpaqueAddress* ,
     unsigned int ebfSummary = ldfReader::LatData::instance()->summaryData().summary();
     LdfEvent::EventSummaryData *summary = new LdfEvent::EventSummaryData(ebfSummary);
     summary->initEventFlags(ldfReader::LatData::instance()->getEventFlags());
+
+
+    // Retrieve the contribution lengths and store them in the EventSummaryData
+    unsigned long gemLen = ldfReader::LatData::instance()->getGem().lenInBytes();
+    unsigned long oswLen = ldfReader::LatData::instance()->getOsw().lenInBytes();
+    unsigned long errLen = ldfReader::LatData::instance()->getErr().lenInBytes();
+    unsigned long diagLen = ldfReader::LatData::instance()->diagnostic()->lenInBytes();
+    unsigned long aemLen = ldfReader::LatData::instance()->getAem().lenInBytes();
+    unsigned long temLen[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    unsigned int i;
+    for (i = 0; i < 16; i++) {
+        if(ldfReader::LatData::instance()->getTower(i)) {
+            temLen[i] = ldfReader::LatData::instance()->getTower(i)->getTem().lenInBytes();
+        }
+    }
+
+    summary->initContribLen(temLen, gemLen, oswLen, errLen, diagLen, aemLen);
 
     refpObject = summary;
 
