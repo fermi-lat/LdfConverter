@@ -24,7 +24,7 @@
  * @brief Takes data from the TDS to test reading from EBF files
  *
  * @author Heather Kelly
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.6 2004/08/06 18:41:11 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.7 2004/08/23 19:00:15 heather Exp $
  */
 
 class test_LdfConverterAlg : public Algorithm
@@ -94,6 +94,7 @@ StatusCode test_LdfConverterAlg::execute()
     log << MSG::INFO << "runId: " << run << " eventId: " << eventId << endreq;
 	double time = evt->time();
 	log << MSG::INFO << "Time (Seconds since Mission Start): " << time << endreq;
+	log << MSG::INFO << "Livetime (seconds) " << evt->livetime() << endreq;
 
     SmartDataPtr<LdfEvent::Gem> gem(eventSvc(), "/Event/Gem");
     if (!gem) {

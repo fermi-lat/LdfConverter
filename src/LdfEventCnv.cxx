@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.2 2004/08/23 18:58:42 heather Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -14,7 +14,7 @@
 
 #include "Event/TopLevel/Event.h"
 #include "ldfReader/data/LatData.h"
-#include "facilities/TimeStamp.h"
+#include "facilities/Timestamp.h"
 #include "astro/JulianDate.h"
 #include "Event/Utilities/TimeStamp.h"
 
@@ -49,17 +49,23 @@ StatusCode LdfEventCnv::createObj(IOpaqueAddress* ,
     header->setEvent(actualEventNum);
     header->setRun(ldfReader::LatData::instance()->runId());
 	
-	// Also set the time in the Event::EventHeader
-	facilities::Timestamp facTimeStamp(
-		ldfReader::LatData::instance()->summaryData().timeSec(), 
-        ldfReader::LatData::instance()->summaryData().timeNanoSec());
-	double julTimeStamp = facTimeStamp.getJulian();
-	astro::JulianDate julDate(julTimeStamp);
-	// Find number of seconds since missionStart
-	double tdsTimeInSeconds = julDate.seconds() - astro::JulianDate::missionStart().seconds();
-	TimeStamp tdsTimeStamp(tdsTimeInSeconds);
-	header->setTime(tdsTimeStamp);
+    // Also set the time in the Event::EventHeader
+    facilities::Timestamp facTimeStamp(
+             ldfReader::LatData::instance()->summaryData().timeSec(), 
+             ldfReader::LatData::instance()->summaryData().timeNanoSec());
+    double julTimeStamp = facTimeStamp.getJulian();
+    astro::JulianDate julDate(julTimeStamp);
+    // Find number of seconds since missionStart
+    double tdsTimeInSeconds = julDate.seconds() - astro::JulianDate::missionStart().seconds();
+    TimeStamp tdsTimeStamp(tdsTimeInSeconds);
+    header->setTime(tdsTimeStamp);
 
+    // Also set the LiveTime using the LDF.  LiveTime in LDF is in counts
+    // where each count corresponds to 50 nsec.
+    ldfReader::GemData ldfGem = ldfReader::LatData::instance()->getGem();
+    // Convert to seconds.. where nanoseconds correspond to 1 billion seconds
+    double ltSec = ldfGem.liveTime() * 50./1000000000.0;
+    header->setLivetime(ltSec);
     return StatusCode::SUCCESS;
 }
 
