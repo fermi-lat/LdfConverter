@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header$
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
 //
 // Description:
 //      LdfEventSummaryCnv is the concrete converter for the event header on the TDS /Event
@@ -36,6 +36,8 @@ StatusCode LdfEventSummaryCnv::createObj(IOpaqueAddress* ,
     // Retrieve the LAT data for this event 
     unsigned int ebfSummary = ldfReader::LatData::instance()->summaryData().summary();
     LdfEvent::EventSummaryData *summary = new LdfEvent::EventSummaryData(ebfSummary);
+    summary->initEventFlags(ldfReader::LatData::instance()->getEventFlags());
+
     refpObject = summary;
 
     return StatusCode::SUCCESS;
