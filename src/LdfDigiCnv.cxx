@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header$
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDigiCnv.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
 //
 // Description:
 //      LdfDigiCnv is the concrete converter for the digi event header on the TDS /Event/Digi
@@ -12,7 +12,7 @@
 #include "LdfDigiCnv.h"
 #include "GaudiKernel/MsgStream.h"
 
-#include "Event/TopLevel/DigiEvent.h"
+//#include "Event/TopLevel/DigiEvent.h"
 
 // Instantiation of a static factory class used by clients to create
 // instances of this service
