@@ -1,7 +1,7 @@
 #ifndef LdfDiagnosticCnv_H
 #define LdfDiagnosticCnv_H 1
 
-#include "LDfBaseCnv.h"
+#include "LdfBaseCnv.h"
 namespace LdfEvent { class DiagnosticData; }
 
 extern const CLID& CLID_LdfDiagnosticData;
@@ -12,7 +12,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfDiagnosticCnv
  * @brief Concrete converter for the EM Diagnostic data stored in the TDS /Event/Diagnostic
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfDiagnosticCnv.h,v 1.2 2004/03/25 19:54:57 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDiagnosticCnv.h,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
  */ 
 
 class LdfDiagnosticCnv : public LdfBaseCnv { 
