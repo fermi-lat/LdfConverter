@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.4 2004/06/21 17:41:21 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.5 2004/06/22 00:27:13 heather Exp $
 // 
 // Description:
 
@@ -14,6 +14,8 @@
 #include "GaudiKernel/IAddressCreator.h"
 #include "GaudiKernel/Property.h"
 #include "GaudiKernel/ObjectVector.h"
+
+#include "ldfReader/data/LatData.h"
 
 #include "facilities/Util.h"
 
@@ -272,17 +274,35 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
     {
         LdfEvtIterator* irfIt = dynamic_cast<LdfEvtIterator*>(&it);
         
-        //log << MSG::DEBUG << "Processing Event " <<  irfIt->m_recId << endreq;
         log << MSG::DEBUG << "Processing Event " <<  irfIt->m_evtCount << endreq;
         
         irfIt->m_evtCount++;
         
-        int status = m_ebfParser->loadData();
-        if (status < 0) {
+        bool DONE=false;
+        while (!DONE) {
+          int status = m_ebfParser->loadData();
+          if (status < 0) {
             log << MSG::INFO << "Failed to get Event" << endreq;
             log << MSG::INFO << "This job will terminate after reading" 
                 << endreq;
             *(irfIt) = m_evtEnd;
+            break;
+          } else {
+            // Check marker to see if this is a data event
+            unsigned int summary = ldfReader::LatData::instance()->summaryData().summary();
+            unsigned marker = EventSummary::marker(summary);
+            log << MSG::INFO << "Marker = " << marker << endreq;
+            if (marker == 0) DONE = true;
+            if (marker != 0) {
+              // Move file pointer for the next event
+              int ret = m_ebfParser->nextEvent();
+              if (ret != 0) {
+                log << MSG::INFO << "Input event source exhausted" << endreq;
+                *(irfIt) = m_evtEnd;
+                return *irfIt;
+              }
+             }
+          }
         }
         
         if(irfIt->m_evtCount > m_evtMax) {
