@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.5 2004/11/24 08:18:46 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.6 2004/12/07 23:06:44 heather Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -12,7 +12,6 @@
 #include "LdfEventCnv.h"
 #include "GaudiKernel/MsgStream.h"
 
-#include "Event/TopLevel/Event.h"
 #include "ldfReader/data/LatData.h"
 #include "facilities/Timestamp.h"
 #include "astro/JulianDate.h"

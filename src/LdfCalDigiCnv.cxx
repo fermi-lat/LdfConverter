@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header$
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -14,7 +14,6 @@
 
 #include "ldfReader/data/LatData.h"
 
-#include "Event/Digi/CalDigi.h"
 
 // Instantiation of a static factory class used by clients to create
 // instances of this service

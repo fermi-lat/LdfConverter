@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.3 2004/08/23 18:58:42 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.4 2004/10/28 19:25:03 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -14,7 +14,7 @@
 
 #include "ldfReader/data/LatData.h"
 
-#include "Event/Digi/AcdDigi.h"
+//#include "Event/Digi/AcdDigi.h"
 #include "idents/AcdId.h"
 
 #include <map>

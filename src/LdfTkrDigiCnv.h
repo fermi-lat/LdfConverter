@@ -4,7 +4,8 @@
 #include "LdfBaseCnv.h"
 
 namespace Event{ class EventHeader; }
-extern const CLID& CLID_TkrDigi;
+#include "Event/Digi/TkrDigi.h"
+//extern const CLID& CLID_TkrDigi;
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -13,7 +14,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfTkrDigiCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfTkrDigiCnv.h,v 1.1.1.1 2003/03/24 15:45:02 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTkrDigiCnv.h,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
  */ 
 
 class LdfTkrDigiCnv : public LdfBaseCnv { 
