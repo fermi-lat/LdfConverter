@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.3 2004/06/21 17:36:28 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.4 2004/06/21 17:41:21 heather Exp $
 // 
 // Description:
 
@@ -279,8 +279,8 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
         
         int status = m_ebfParser->loadData();
         if (status < 0) {
-            log << MSG::ERROR << "Failed to get Event" << endreq;
-            log << MSG::ERROR << "This job will terminate after reading" 
+            log << MSG::INFO << "Failed to get Event" << endreq;
+            log << MSG::INFO << "This job will terminate after reading" 
                 << endreq;
             *(irfIt) = m_evtEnd;
         }
