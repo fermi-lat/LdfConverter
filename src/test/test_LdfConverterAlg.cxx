@@ -12,6 +12,7 @@
 #include "Event/Digi/AcdDigi.h"
 #include "LdfEvent/DiagnosticData.h"
 #include "LdfEvent/EventSummaryData.h"
+#include "LdfEvent/Gem.h"
 #include "idents/CalXtalId.h"
 
 //static const AlgFactory<test_LdfConverterAlg> Factory;
@@ -23,7 +24,7 @@
  * @brief Takes data from the TDS to test reading from EBF files
  *
  * @author Heather Kelly
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.2 2004/05/19 23:44:46 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.3 2004/07/22 00:29:55 heather Exp $
  */
 
 class test_LdfConverterAlg : public Algorithm
@@ -91,6 +92,14 @@ StatusCode test_LdfConverterAlg::execute()
     int eventId = evt->event();
     int run = evt->run();
     log << MSG::INFO << "runId: " << run << " eventId: " << eventId << endreq;
+
+    SmartDataPtr<LdfEvent::Gem> gem(eventSvc(), "/Event/Gem");
+    if (!gem) {
+        log << MSG::INFO << "No GEM available" << endreq;
+    } else {
+        gem->fillStream(log.stream());
+    }
+  
 
     /*SmartDataPtr<LdfEvent::DiagnosticData> diag(eventSvc(), "/Event/Diagnostic");
     if (!diag) {
