@@ -28,7 +28,7 @@ class IDataProviderSvc;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.2 2004/06/21 17:36:28 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.3 2004/06/21 17:41:21 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -90,6 +90,7 @@ private:
   std::string           m_fileName;
   ldfReader::LdfParser*            m_ebfParser;
   IntegerProperty       m_ebfDebugLevel;  // If 0 (the default) no debug.
+  IntegerProperty       m_sweepSearch; // If 0, skip search
   IAddressCreator*      m_addrCreator;
   CLID                  m_rootCLID;
 };
