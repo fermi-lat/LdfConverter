@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.4 2004/10/04 21:35:18 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.5 2005/03/15 23:46:22 heather Exp $
 //
 // Description:
 //      LdfEventSummaryCnv is the concrete converter for the event header on the TDS /Event
@@ -39,6 +39,7 @@ StatusCode LdfEventSummaryCnv::createObj(IOpaqueAddress* ,
     LdfEvent::EventSummaryData *summary = new LdfEvent::EventSummaryData(ebfSummary);
     summary->initEventFlags(ldfReader::LatData::instance()->getEventFlags());
 
+    summary->initOswEvtSequence(ldfReader::LatData::instance()->getOsw().evtSequence());
 
     // Retrieve the contribution lengths and store them in the EventSummaryData
     unsigned int gemLen = ldfReader::LatData::instance()->getGem().lenInBytes();
