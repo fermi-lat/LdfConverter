@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.2 2004/08/05 01:19:09 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.3 2004/08/06 18:42:18 heather Exp $
 //
 // Description:
 //      LdfGemCnv is the concrete converter for the event header on the TDS /Event
@@ -36,12 +36,12 @@ StatusCode LdfGemCnv::createObj(IOpaqueAddress* ,
     // Retrieve the GEM data for this event 
     ldfReader::GemData ldfGem = ldfReader::LatData::instance()->getGem();
     ldfReader::GemDataTileList ldfTileList = ldfGem.tileList();
-    LdfEvent::GemDataTileList tdsTileList(ldfTileList.XZM(), ldfTileList.XZP(),
+    LdfEvent::GemTileList tdsTileList(ldfTileList.XZM(), ldfTileList.XZP(),
             ldfTileList.YZM(), ldfTileList.YZP(), ldfTileList.XY(), 
             ldfTileList.RBN(), ldfTileList.NA());
     gem->initTrigger(ldfGem.tkrVector(), ldfGem.roiVector(), ldfGem.calLEvector(),
         ldfGem.calHEvector(), ldfGem.cnoVector(), ldfGem.conditionSummary(), tdsTileList);
-    LdfEvent::GemDataOnePpsTime ppsTime(ldfGem.onePpsTime().timebase(),
+    LdfEvent::GemOnePpsTime ppsTime(ldfGem.onePpsTime().timebase(),
         ldfGem.onePpsTime().seconds());
     gem->initSummary(ldfGem.liveTime(), ldfGem.prescaled(), ldfGem.discarded(),
         ldfGem.sent(), ldfGem.triggerTime(), ppsTime, ldfGem.deltaEventTime());
