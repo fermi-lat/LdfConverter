@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.1 2004/08/02 21:05:54 heather Exp $
 //
 // Description:
 //      LdfGemCnv is the concrete converter for the event header on the TDS /Event
@@ -31,7 +31,7 @@ LdfGemCnv::LdfGemCnv(ISvcLocator* svc)
 StatusCode LdfGemCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {
     // Purpose and Method:  This converter will store Ebf time on the TDS.
-    LdfEvent::LdfGem *gem = new LdfEvent::Gem();
+    LdfEvent::Gem *gem = new LdfEvent::Gem();
     refpObject = gem;
     // Retrieve the LAT data for this event 
     ldfReader::GemData ldfGem = ldfReader::LatData::instance()->getGem();
