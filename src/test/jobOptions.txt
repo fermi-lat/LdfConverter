@@ -1,7 +1,7 @@
 //##############################################################
 //
 // basic Job options file for a test_LdfConveter.exe
-// $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/test/jobOptions.txt,v 1.8 2003/08/27 18:37:02 jrb Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/jobOptions.txt,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
 
 // primary DLLs, including auditor 
 
@@ -21,8 +21,8 @@ ApplicationMgr.ExtSvc = {
 EventPersistencySvc.CnvServices = {"EventCnvSvc"};
 
 
-// EventSelector.StorageType = "EBFFILE";
-EventSelector.StorageType = "EBFFITS";
+EventSelector.StorageType = "EBFFILE";
+//EventSelector.StorageType = "EBFFITS";
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5.ebf"};
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5_1.fits"};
 // EventSelector.InputList = {"$(LDFCONVERTERROOT)/data/ebf030502182112.fits"};
@@ -31,7 +31,8 @@ EventSelector.StorageType = "EBFFITS";
 // EventSelector.InputList = {"$(LDFCONVERTERROOT)/data/ebf030729135138.fits"};
 
 // Following is standard test file used in nightly build
-EventSelector.InputList = {"/nfs/farm/g/glast/u03/EM2003/miniTower/unzipped/ebf030507023417.fits"};
+//EventSelector.InputList = {"/nfs/farm/g/glast/u03/EM2003/miniTower/unzipped/ebf030507023417.fits"};
+EventSelector.InputList = {"$GLAST_EXT/LDF/v05-01-02/test/data/muon-5.arch"};
 
 // New full EM file, including CAL data, from Ric
 // EventSelector.InputList = {"/nfs/slac/g/glast/users/glground/jrb/data/ebf030815025559.fits"};
