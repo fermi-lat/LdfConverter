@@ -13,7 +13,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfAcdDigiCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.1 2004/06/23 18:23:57 heather Exp $
  */ 
 
 class LdfAcdDigiCnv : public LdfBaseCnv { 
@@ -37,6 +37,9 @@ protected:
 
   /// override the LdfBaseCnv version
   virtual StatusCode updateObj(int* data, Event::EventHeader* pObject);
+
+  void LdfAcdDigiCnv::base10ToAcdId(unsigned int val, short &lay, short &face, 
+                          short &row, short &col);
 
 
 };
