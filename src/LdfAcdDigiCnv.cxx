@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.2 2004/07/22 00:29:08 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.3 2004/08/23 18:58:42 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -63,6 +63,8 @@ StatusCode LdfAcdDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
         for (curReadout = readoutCol.begin(); curReadout != readoutCol.end(); curReadout++) {
             int index = (curReadout->getSide() == ldfReader::AcdDigi::A) ? 0 : 1;
             pha[index] = (unsigned short) curReadout->getPha();
+            vetoArr[index] = curReadout->getHit();
+            lowArr[index] = curReadout->getAccept();
         }
         Event::AcdDigi *newDigi = new Event::AcdDigi(
             identsId, identsId.volId(), 0.0, pha, vetoArr, lowArr, cnoArr);
