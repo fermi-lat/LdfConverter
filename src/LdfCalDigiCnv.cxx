@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.2 2004/12/18 17:23:19 usher Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -83,7 +83,7 @@ StatusCode LdfCalDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
     return StatusCode::SUCCESS;
 }
 
-StatusCode LdfCalDigiCnv::updateObj(int* , Event::EventHeader* ) {
+StatusCode LdfCalDigiCnv::updateObj(int* , Event::CalDigi* ) {
     // Purpose and Method:  This method does nothing other than announce it has
     //   been called.
 

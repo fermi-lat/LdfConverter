@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTkrDigiCnv.cxx,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTkrDigiCnv.cxx,v 1.2 2004/12/18 17:23:19 usher Exp $
 //
 // Description:
 //      LdfTkrDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -108,7 +108,7 @@ StatusCode LdfTkrDigiCnv::createObj(IOpaqueAddress* ,
     return StatusCode::SUCCESS;
 }
 
-StatusCode LdfTkrDigiCnv::updateObj(int* , Event::EventHeader* ) {
+StatusCode LdfTkrDigiCnv::updateObj(int* , Event::TkrDigi* ) {
     // Purpose and Method:  This method does nothing other than announce it has
     //   been called.
 

@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.3 2004/08/06 18:42:18 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfGemCnv.cxx,v 1.4 2004/08/18 20:34:57 heather Exp $
 //
 // Description:
 //      LdfGemCnv is the concrete converter for the event header on the TDS /Event
@@ -13,7 +13,7 @@
 #include "GaudiKernel/MsgStream.h"
 
 #include "ldfReader/data/LatData.h"
-#include "LdfEvent/Gem.h"
+//#include "LdfEvent/Gem.h"
 
 // Instantiation of a static factory class used by clients to create
 // instances of this service
@@ -48,7 +48,7 @@ StatusCode LdfGemCnv::createObj(IOpaqueAddress* ,
     return StatusCode::SUCCESS;
 }
 
-StatusCode LdfGemCnv::updateObj(int* , LdfEvent::LdfGem*) {
+StatusCode LdfGemCnv::updateObj(int* , LdfEvent::Gem*) {
     // Purpose and Method:  This method does nothing other than announce it has
     //   been called.
 

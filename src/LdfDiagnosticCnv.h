@@ -2,9 +2,7 @@
 #define LdfDiagnosticCnv_H 1
 
 #include "LdfBaseCnv.h"
-namespace LdfEvent { class DiagnosticData; }
-
-extern const CLID& CLID_LdfDiagnosticData;
+#include "LdfEvent/DiagnosticData.h"
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -12,7 +10,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfDiagnosticCnv
  * @brief Concrete converter for the EM Diagnostic data stored in the TDS /Event/Diagnostic
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDiagnosticCnv.h,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDiagnosticCnv.h,v 1.2 2004/05/13 22:40:41 heather Exp $
  */ 
 
 class LdfDiagnosticCnv : public LdfBaseCnv { 

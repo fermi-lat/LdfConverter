@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.4 2004/10/28 19:25:03 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.5 2004/12/18 17:23:19 usher Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -81,7 +81,7 @@ StatusCode LdfAcdDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
     return StatusCode::SUCCESS;
 }
 
-StatusCode LdfAcdDigiCnv::updateObj(int* , Event::EventHeader* ) {
+StatusCode LdfAcdDigiCnv::updateObj(int* , Event::AcdDigi* ) {
     // Purpose and Method:  This method does nothing other than announce it has
     //   been called.
 

@@ -2,9 +2,8 @@
 #define LdfTimeCnv_H 1
 
 #include "LdfBaseCnv.h"
-namespace LdfEvent { class LdfTime; }
 
-extern const CLID& CLID_LdfTime;
+#include "LdfEvent/LdfTime.h"
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -13,7 +12,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfTimeCnv
  * @brief Concrete converter for the time stored in the TDS /Event/Time
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfTimeCnv.h,v 1.2 2004/03/25 19:54:57 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTimeCnv.h,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
  */ 
 
 class LdfTimeCnv : public LdfBaseCnv { 

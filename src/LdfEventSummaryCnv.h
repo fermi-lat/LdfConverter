@@ -2,9 +2,7 @@
 #define LDFEVENTCNV_H 1
 
 #include "LdfBaseCnv.h"
-namespace LdfEvent { class EventSummaryData; }
-
-extern const CLID& CLID_LdfEventSummaryData;
+#include "LdfEvent/EventSummaryData.h"
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -13,7 +11,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfEventSummaryCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfEventSummaryCnv.h,v 1.3 2004/03/25 19:54:58 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.h,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
  */ 
 
 class LdfEventSummaryCnv : public LdfBaseCnv { 

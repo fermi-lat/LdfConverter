@@ -3,9 +3,7 @@
 
 #include "LdfBaseCnv.h"
 
-namespace Event{ class EventHeader; }
 #include "Event/Digi/AcdDigi.h"
-//extern const CLID& CLID_AcdDigi;
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -14,7 +12,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfAcdDigiCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.2 2004/08/23 18:58:42 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.3 2004/12/18 17:23:19 usher Exp $
  */ 
 
 class LdfAcdDigiCnv : public LdfBaseCnv { 
@@ -37,7 +35,7 @@ protected:
   virtual StatusCode createObj(IOpaqueAddress* pAddress, DataObject*& refpObject);
 
   /// override the LdfBaseCnv version
-  virtual StatusCode updateObj(int* data, Event::EventHeader* pObject);
+  virtual StatusCode updateObj(int* data, Event::AcdDigi* pObject);
 
   void LdfAcdDigiCnv::base10ToAcdId(unsigned int val, short &lay, short &face, 
                           short &row, short &col);

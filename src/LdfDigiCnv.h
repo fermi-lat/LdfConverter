@@ -6,7 +6,6 @@
 namespace Event{ class EventHeader; }
 
 #include "Event/TopLevel/DigiEvent.h"
-//extern const CLID& CLID_DigiEvent;
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -15,7 +14,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfDigiCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDigiCnv.h,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDigiCnv.h,v 1.2 2004/12/20 18:24:15 usher Exp $
  */ 
 
 class LdfDigiCnv : public LdfBaseCnv { 
@@ -38,7 +37,7 @@ protected:
   virtual StatusCode createObj(IOpaqueAddress* pAddress, DataObject*& refpObject);
 
   /// override the EbfBaseCnv version
-  virtual StatusCode updateObj(int* data, Event::EventHeader* pObject);
+  virtual StatusCode updateObj(int* data, Event::DigiEvent* pObject);
 
 
 };
