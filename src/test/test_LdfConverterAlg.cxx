@@ -24,7 +24,7 @@
  * @brief Takes data from the TDS to test reading from EBF files
  *
  * @author Heather Kelly
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.4 2004/08/02 21:06:41 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.5 2004/08/05 01:20:38 heather Exp $
  */
 
 class test_LdfConverterAlg : public Algorithm
@@ -97,7 +97,7 @@ StatusCode test_LdfConverterAlg::execute()
     if (!gem) {
         log << MSG::INFO << "No GEM available" << endreq;
     } else {
-       log << MSG::INFO << "GEM";
+       log << MSG::INFO;
        (*gem).fillStream(log.stream());
 	   log << endreq;
     }
