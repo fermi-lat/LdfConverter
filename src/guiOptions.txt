@@ -1,0 +1,22 @@
+// ---------------------------------------------------------
+// Options for Gleam that are specific to defining a display
+// $Id: guiOptions.txt,v 1.1 2003/09/05 20:38:56 heather Exp $
+// this necessary (for now) to see the event
+G4Generator.UIcommands+={"/tracking/storeTrajectory 1"};
+G4Generator.saveTrajectories=true;
+
+ApplicationMgr.ExtSvc += {"GuiSvc"};
+ApplicationMgr.Runable = "GuiSvc";
+GuiSvc.size=-3000;  // set size, orientation
+
+ApplicationMgr.DLLs   += {"FluxDisplay", "DetDisplay" };    
+
+// these are algorithms 
+EventDisplay.Members = {
+   "TkrDisplayAlg",
+   "CalDisplay",
+   "AcdDisplay"  
+   };
+
+// -------end display-specific-------
+// ----------------------------------
