@@ -28,7 +28,7 @@ class IDataProviderSvc;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfEventSelector.h,v 1.6 2003/05/20 18:41:42 jrb Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -60,8 +60,8 @@ public:
     
 private:
   enum CriteriaType { 
-    EBFFILE, //When the input is a raw file
-    EBFFITS, //When the input is fitsified raw ebf
+    LDFFILE, //When the input is a raw file
+    LDFFITS, //When the input is fitsified raw ldf
     NONE     //When there is no input
   };
     
@@ -70,7 +70,7 @@ private:
   //! Used internally to get the MaxEvent from the ApplicationMgr
   StatusCode LdfEventSelector::getMaxEvent();
 
-  /// Job options parameter. Options are EBFFILE, EBFFITS
+  /// Job options parameter. Options are LDFFILE, LDFFITS
   StringProperty        m_storageType;
 
   /// Job options parameter. List of input data files
