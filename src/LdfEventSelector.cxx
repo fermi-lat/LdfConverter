@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.8 2005/01/21 05:27:43 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.9 2005/02/02 22:06:57 heather Exp $
 // 
 // Description:
 
@@ -276,12 +276,13 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
   const {
     MsgStream log(msgSvc(), name());
     
+    LdfEvtIterator* irfIt = dynamic_cast<LdfEvtIterator*>(&it);
     unsigned marker;
     try {
     if  ((m_criteriaType == LDFFILE) ||
          (m_criteriaType == LDFFITS) )
     {
-        LdfEvtIterator* irfIt = dynamic_cast<LdfEvtIterator*>(&it);
+   //     LdfEvtIterator* irfIt = dynamic_cast<LdfEvtIterator*>(&it);
         
         log << MSG::DEBUG << "Processing Event " <<  irfIt->m_evtCount << endreq;
         
@@ -371,11 +372,13 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
    } catch(LdfException &e) {
 
       log << MSG::ERROR << "LdfException caught " << e.what() << endreq;
-      throw;
+      *(irfIt) = m_evtEnd;
+      return *irfIt;
    } catch(...) {
 
       log << MSG::ERROR << "Exception caught " << endreq;
-      throw;
+      *(irfIt) = m_evtEnd;
+      return *irfIt;
    }
 }
 
