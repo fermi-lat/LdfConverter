@@ -28,7 +28,7 @@ class IDataProviderSvc;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.2 2004/06/21 17:36:28 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -60,6 +60,8 @@ public:
     
 private:
   enum CriteriaType { 
+    EBFFILE,
+    EBFFITS,
     LDFFILE, //When the input is a raw file
     LDFFITS, //When the input is fitsified raw ldf
     NONE     //When there is no input

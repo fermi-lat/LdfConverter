@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.2 2004/06/21 17:30:25 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.3 2004/06/21 17:36:28 heather Exp $
 // 
 // Description:
 
@@ -100,7 +100,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
     StatusCode sc;
     MsgStream log(msgSvc(), name());
 
-    if (storageType == "LDFFILE") {
+    if ( (storageType == "LDFFILE") || (storageType == "EBFFILE") ) {
       m_criteriaType = LDFFILE;
 
       m_fileName = (m_inputList.value())[0];
@@ -120,7 +120,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
       }
       m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
 
-    } else if (storageType == "LDFFITS") {
+    } else if ((storageType == "LDFFITS") || (storageType == "EBFFITS")) {
       m_criteriaType = LDFFITS;
 
       m_fileName = (m_inputList.value())[0];
