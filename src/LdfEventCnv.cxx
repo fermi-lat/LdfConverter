@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.3 2004/08/24 17:17:56 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.4 2004/10/15 15:22:00 heather Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -70,7 +70,7 @@ StatusCode LdfEventCnv::createObj(IOpaqueAddress* ,
 
     // initialize the trigger to zero to promote processing if TriggerAlg is
     // run
-    header->setTrigger(0);
+    header->setTrigger(-1);
 
     return StatusCode::SUCCESS;
 }
