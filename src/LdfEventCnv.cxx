@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.2 2004/08/23 18:58:42 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.3 2004/08/24 17:17:56 heather Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -66,6 +66,12 @@ StatusCode LdfEventCnv::createObj(IOpaqueAddress* ,
     // Convert to seconds.. where nanoseconds correspond to 1 billion seconds
     double ltSec = ldfGem.liveTime() * 50./1000000000.0;
     header->setLivetime(ltSec);
+
+
+    // initialize the trigger to zero to promote processing if TriggerAlg is
+    // run
+    header->setTrigger(0);
+
     return StatusCode::SUCCESS;
 }
 
