@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.11 2005/04/01 01:54:40 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.12 2005/04/13 04:49:55 heather Exp $
 // 
 // Description:
 
@@ -312,8 +312,9 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
             static unsigned int skippedEvents = 0;
             if (!findFirstMarkerFive) {
                 if (marker == 5) { 
-                    log << MSG::WARNING << "Skipped " << skippedEvents 
-                        << " Events before finding first sweep event" << endreq;
+                    if (skippedEvents > 0)
+                        log << MSG::WARNING << "Skipped " << skippedEvents 
+                          << " Events before finding first sweep event" << endreq;
                     findFirstMarkerFive = true; 
                 } else {
                     if (!skippedEvents)
