@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.6 2004/12/07 23:06:44 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.7 2004/12/18 17:23:19 usher Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -43,11 +43,7 @@ StatusCode LdfEventCnv::createObj(IOpaqueAddress* ,
     // According to LAT Inter-module Communications Reference Manual
     // the event number is a 17 bit value, the 2 least significant are the
     // tag and the 15 most significant are in the eventNumber field of the summary
-    unsigned eventNumber = EventSummary::eventNumber(summary);
-    unsigned tag = EventSummary::tag(summary);
-    //long actualEventNum = (tag << 15) | eventNumber;
-    long actualEventNum = (eventNumber << 2) | tag;
-    header->setEvent(actualEventNum);
+    header->setEvent(ldfReader::LatData::instance()->getOsw().evtSequence());
     header->setRun(ldfReader::LatData::instance()->runId());
 	
     // Also set the time in the Event::EventHeader
