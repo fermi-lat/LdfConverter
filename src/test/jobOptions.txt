@@ -1,7 +1,7 @@
 //##############################################################
 //
 // basic Job options file for a test_LdfConveter.exe
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/jobOptions.txt,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/jobOptions.txt,v 1.2 2004/09/24 22:11:05 heather Exp $
 
 // primary DLLs, including auditor 
 
@@ -21,8 +21,8 @@ ApplicationMgr.ExtSvc = {
 EventPersistencySvc.CnvServices = {"EventCnvSvc"};
 
 
-EventSelector.StorageType = "EBFFILE";
-//EventSelector.StorageType = "EBFFITS";
+EventSelector.StorageType = "LDFFILE";
+//EventSelector.StorageType = "LDFFITS";
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5.ebf"};
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5_1.fits"};
 // EventSelector.InputList = {"$(LDFCONVERTERROOT)/data/ebf030502182112.fits"};
