@@ -28,7 +28,7 @@ class IDataProviderSvc;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.3 2004/06/21 17:41:21 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.4 2005/04/01 01:54:53 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -93,6 +93,9 @@ private:
   IntegerProperty       m_sweepSearch; // If 0, skip search
   IAddressCreator*      m_addrCreator;
   CLID                  m_rootCLID;
+  IntegerProperty       m_gemCheck; // If 0 (default) no GEM condition summary
+                                    // check, other check for zero and print
+                                    // log message
 };
 
 #endif  // LdfEventSelector_H

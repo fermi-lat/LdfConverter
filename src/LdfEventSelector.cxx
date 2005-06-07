@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.12 2005/04/13 04:49:55 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.13 2005/04/15 00:29:47 heather Exp $
 // 
 // Description:
 
@@ -79,6 +79,7 @@ LdfEventSelector::LdfEventSelector( const std::string& name, ISvcLocator* svcloc
     declareProperty("Instrument", m_instrument="LAT");
     declareProperty("EbfDebugLevel", m_ebfDebugLevel = 0);
     declareProperty("SweepEventSearch", m_sweepSearch = 1);
+    declareProperty("GemZeroCheck", m_gemCheck=0);
 
     m_inputDataList = new ListName; 
     m_it = new LdfEvtIterator(this, -1, m_inputDataList->begin());
@@ -338,6 +339,20 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
           }
         }
         
+
+        if (m_gemCheck) {
+            static short foundFive = 0;
+            if ( (foundFive < 5) &&
+              (ldfReader::LatData::instance()->getGem().conditionSummary() == 0) )  {
+                if (foundFive < 4)
+                    log << MSG::WARNING << "GEM Condition Summary Zero" << endreq;
+                else if (foundFive == 4)
+                    log << MSG::WARNING << "GEM Condition Summary Zero - further warnings will be suppressed" << endreq; 
+                ++foundFive;
+            }
+
+        }
+
         if(irfIt->m_evtCount > m_evtMax) {
             *(irfIt) = m_evtEnd;
             log << MSG::INFO << "Stopping loop at user maxEvent Request" 
