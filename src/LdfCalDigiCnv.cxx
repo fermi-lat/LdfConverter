@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.2 2004/12/18 17:23:19 usher Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.3 2005/01/04 20:36:29 heather Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -53,6 +53,10 @@ StatusCode LdfCalDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
                 ldfReader::CalDigi::CalTrigMode mode = it->second->getMode();
                 if (mode == ldfReader::CalDigi::BESTRANGE) {
                     const ldfReader::CalDigi::CalReadout *readout = it->second->getXtalReadout(0);
+                    if (!readout) {
+                        printf("LdfCalDigiCnv:  Faen! In BESTRANGE mode but first readout does not exist\n");
+                        exit(1);
+                    }
                     char rangeP = readout->getRange(ldfReader::CalDigi::POS);
                     unsigned short adcP = readout->getAdc(ldfReader::CalDigi::POS);
                     char rangeM = readout->getRange(ldfReader::CalDigi::NEG);
@@ -67,6 +71,10 @@ StatusCode LdfCalDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
                     unsigned int j;
                     for (j=0; j<4; j++) {
                         const ldfReader::CalDigi::CalReadout *readout = it->second->getXtalReadout(j);
+                        if (!readout) {
+                            printf("LdfCalDigiCnv:  Faen!  In ALLRANGE mode but not all range readouts are populated!\n");
+                            exit(1);
+                        }
                         char rangeP = readout->getRange(ldfReader::CalDigi::POS);
                         unsigned short adcP = readout->getAdc(ldfReader::CalDigi::POS);
                         char rangeM = readout->getRange(ldfReader::CalDigi::NEG);
