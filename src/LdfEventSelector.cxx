@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.14 2005/06/07 16:59:34 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.15 2005/08/10 21:30:25 heather Exp $
 // 
 // Description:
 
@@ -310,8 +310,7 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
         }
 
         if ((m_startEventIndex > 0) && (!findFirstMarkerFive)) {
-            log << MSG::WARNING << "Since StartEventIndex is non-zero, skipping
-              search for first sweep event" << endreq;
+            log << MSG::WARNING << "Since StartEventIndex is non-zero, skipping search for first sweep event" << endreq;
             findFirstMarkerFive = true;
         }
         

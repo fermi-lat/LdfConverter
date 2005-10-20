@@ -3,6 +3,7 @@ Package LdfConverter
 Coordinator:H.Kelly
 @verbatim
 
+v1r15gr1 20-Oct-2005 HMK Patch to string to avoid breaking it across lines
 v1r15   10-Aug-2005 HMK Add two new JO parameters StartEventIndex and
         StartEventNumber
 v1r14   14-Jul-2005 HMK Add check to LdfCalDigiCnv for all four readouts in 
