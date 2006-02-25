@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/MetaEventCnv.cxx,v 1.7 2005/04/18 17:34:56 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/MetaEventCnv.cxx,v 1.1 2006/02/21 22:44:03 heather Exp $
 //
 // Description:
 //      MetaEventCnv is the concrete converter for the event header on the TDS /Event
@@ -30,7 +30,7 @@ MetaEventCnv::MetaEventCnv(ISvcLocator* svc)
 StatusCode MetaEventCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {
     // Purpose and Method:  This converter will store LDF Gem on the TDS.
-    const lsfDataStore::MetaEvent& lsfMetaEvent = ldfReader::LatData::instance()->getMetaEvent();
+    const lsfData::MetaEvent& lsfMetaEvent = ldfReader::LatData::instance()->getMetaEvent();
     LsfEvent::MetaEvent *me = new LsfEvent::MetaEvent(lsfMetaEvent);
     refpObject = me;
 
