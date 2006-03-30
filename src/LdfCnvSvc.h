@@ -18,7 +18,7 @@ class IOpaqueAddress;
  * access to the data and put it on the TDS.
  * Based on SICb service written by Markus Frank.
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfCnvSvc.h,v 1.1.1.1 2003/03/24 15:45:02 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCnvSvc.h,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
  */
 
 class LdfCnvSvc  : virtual public ConversionSvc, virtual public ILdfCnvSvc	{
@@ -41,7 +41,7 @@ public:
   virtual StatusCode declareObject(const ILdfCnvSvc::Leaf& leaf);
 
   /// Override inherited queryInterface due to enhanced interface
-  virtual StatusCode queryInterface(const IID& riid, void** ppvInterface);
+  virtual StatusCode queryInterface(const InterfaceID& riid, void** ppvInterface);
 
   /** IAddressCreator implementation: Address creation.
     Create an address using the link infotmation together with
@@ -53,7 +53,7 @@ public:
     @param refpAddress    Opaque address information to retrieve object
     @return               StatusCode indicating SUCCESS or failure
   */
-  virtual StatusCode createAddress( unsigned char svc_type,
+  virtual StatusCode createAddress( long svc_type,
                                     const CLID& clid,
                                     const std::string* par, 
                                     const unsigned long* ip,

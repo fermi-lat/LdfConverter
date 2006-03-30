@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header$
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCnvSvc.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $
 //
 // Description:
 //      LdfCnvSvc is the GLAST converter service.
@@ -29,7 +29,7 @@
 static const InterfaceID IID_ILdfBaseCnv("ILdfBaseCnv", 1 , 0); 
 
 // RCS Id for identification of object version
-static const char* rcsid = "$Id$";
+static const char* rcsid = "$Id: LdfCnvSvc.cxx,v 1.1.1.1 2004/05/13 22:02:48 heather Exp $";
 
 
 // Instantiation of a static factory class used by clients to create
@@ -157,7 +157,7 @@ StatusCode LdfCnvSvc::updateServiceState(IOpaqueAddress* pAddress)    {
     return status;
 }
 
-StatusCode LdfCnvSvc::queryInterface(const IID& riid, void** ppvInterface)  {
+StatusCode LdfCnvSvc::queryInterface(const InterfaceID& riid, void** ppvInterface)  {
     if ( IID_ILdfBaseCnv == riid )  {
         *ppvInterface = (ILdfCnvSvc*)this;
     }
@@ -169,7 +169,7 @@ StatusCode LdfCnvSvc::queryInterface(const IID& riid, void** ppvInterface)  {
     return StatusCode::SUCCESS;
 }
 
-StatusCode LdfCnvSvc::createAddress(unsigned char svc_type,
+StatusCode LdfCnvSvc::createAddress(long svc_type,
                                       const CLID& clid,
                                       const std::string* , 
                                       const unsigned long* ,

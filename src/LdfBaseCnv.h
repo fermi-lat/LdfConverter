@@ -9,14 +9,14 @@
 
 //class IGlastDetSvc;
 
-extern unsigned const char TEST_StorageType;
+extern const long TEST_StorageType;
 
 /** @class LdfBaseCnv
 * @brief Base class for all GLAST EBF Converters.
 *
 * Based on SICb's SicbBaseCnv
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/LdfBaseCnv.h,v 1.1.1.1 2003/03/24 15:45:02 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfBaseCnv.h,v 1.1.1.1 2004/05/13 22:02:47 heather Exp $
 */
 class LdfBaseCnv : public Converter      {
 protected:
@@ -38,6 +38,8 @@ public:
     static const unsigned char storageType()      { 
         return TEST_StorageType; 
     }
+
+    long repSvcType() const { return TEST_StorageType; }
     
     virtual StatusCode initialize();
     
