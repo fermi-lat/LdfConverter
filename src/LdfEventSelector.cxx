@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.20 2006/03/03 18:57:10 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.21 2006/03/14 18:37:47 heather Exp $
 // 
 // Description:
 
@@ -142,6 +142,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
       
       log << MSG::DEBUG << "ctor DfiParser " << m_fileName << endreq;
       m_ebfParser = new ldfReader::DfiParser(m_fileName);
+      m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
       log << MSG::DEBUG << "return from ctor" << endreq;
       } catch(...) {
         log << MSG::ERROR << "failed to setup DfiParser" << endreq;
@@ -329,10 +330,12 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
             // EventSequence in the OSW contribution to see if we've reached
             // The event in question.
             if (m_startEventNumber > 0) {
-                unsigned int eventSeq = ldfReader::LatData::instance()->getOsw().evtSequence();
+                unsigned long long eventSeq = ldfReader::LatData::instance()->eventId();
                 if (eventSeq >= m_startEventNumber) {
-                    log << MSG::DEBUG << "Processing Event Number: " << eventSeq
-                        << " and was searching for " << m_startEventNumber << endreq;
+                    log << MSG::DEBUG << "Processing Event Number: " 
+                        << (long long int) eventSeq
+                        << " and was searching for " << m_startEventNumber 
+                        << endreq;
                     foundEventNumber = true;
                 }
             } else 
