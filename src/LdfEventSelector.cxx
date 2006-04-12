@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.21 2006/03/14 18:37:47 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.21.2.1 2006/03/31 01:38:19 heather Exp $
 // 
 // Description:
 
@@ -142,6 +142,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
       
       log << MSG::DEBUG << "ctor DfiParser " << m_fileName << endreq;
       m_ebfParser = new ldfReader::DfiParser(m_fileName);
+      m_ebfParser->printHeader();
       m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
       log << MSG::DEBUG << "return from ctor" << endreq;
       } catch(...) {
