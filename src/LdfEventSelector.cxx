@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.21.2.1 2006/03/31 01:38:19 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.21.2.2 2006/04/12 07:20:58 heather Exp $
 // 
 // Description:
 
@@ -269,7 +269,7 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
 
     log << MSG::DEBUG << "next" << endreq;
     // static counter for use when we want to skip to event N
-    static unsigned int counter = 0;
+    static unsigned long long counter = 0;
     
     LdfEvtIterator* irfIt = dynamic_cast<LdfEvtIterator*>(&it);
     unsigned marker;
@@ -291,11 +291,14 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
         counter++;  //increment skip counter too
 
         if ((m_startEventIndex > 0) && (counter >= m_startEventIndex))  
-            log << MSG::DEBUG << "Processing Event Absolute Index " << counter << endreq;
+            log << MSG::DEBUG << "Processing Event Absolute Index " 
+                << (long long int) counter << endreq;
         else if ((m_startEventNumber == 0) && (m_startEventIndex == 0) )
-            log << MSG::DEBUG << "Processing Event " <<  irfIt->m_evtCount << endreq;
+            log << MSG::DEBUG << "Processing Event " 
+                <<  irfIt->m_evtCount << endreq;
         else if (m_startEventIndex > 0)
-            log << MSG::DEBUG << "Starting Processing on Index " << m_startEventIndex << endreq;
+            log << MSG::DEBUG << "Starting Processing on Index " 
+                << m_startEventIndex << endreq;
 
         static bool findFirstMarkerFive = false;
         static bool findSecondMarkerFive = false;
@@ -387,6 +390,18 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
                 int ret = m_ebfParser->nextEvent();
                 if (ret != 0) {
                   log << MSG::INFO << "Input event source exhausted" << endreq;
+                  if (counter != m_ebfParser->eventCount())
+                      log << MSG::WARNING << "Number of events process " 
+                          << (long long int) counter 
+                          << " does not match number of events in input file "
+                          << (long long int) m_ebfParser->eventCount() 
+                          << endreq;
+                  else
+                      log << MSG::INFO << "Processed " 
+                          << (long long int) counter 
+                          << " event from a file containing " 
+                          << (long long int) m_ebfParser->eventCount() 
+                          << " events" << endreq;
                   *(irfIt) = m_evtEnd;
                   return *irfIt;
                 }
@@ -425,11 +440,31 @@ IEvtSelector::Iterator& LdfEventSelector::next(IEvtSelector::Iterator& it)
         if ( (ret !=0 ) && (m_criteriaType == CCSDSFILE) ) { 
           log << MSG::INFO << "Last event found: source exhausted" << endreq;
           lastEventFlag = true;
+          if (counter != m_ebfParser->eventCount())
+              log << MSG::WARNING << "Number of events process " 
+                  << (long long int) counter
+                  << " does not match number of events in input file "
+                  << (long long int) m_ebfParser->eventCount() << endreq;
+          else
+              log << MSG::INFO << "Processed " << (long long int) counter 
+                  << " event from a file containing " 
+                  << (long long int) m_ebfParser->eventCount() 
+                  << " events" << endreq;
         } else if (ret != 0) {
           log << MSG::INFO << "Input event source exhausted" << endreq;
           if (marker != 5) 
               log << MSG::WARNING << "Last Event was not a sweep event with"
                   << " marker == 5" << endreq;
+          if (counter != m_ebfParser->eventCount())
+              log << MSG::WARNING << "Number of events process " 
+                  << (long long int) counter
+                  << " does not match number of events in input file "
+                  << (long long int) m_ebfParser->eventCount() << endreq;
+          else 
+              log << MSG::INFO << "Processed " << (long long int) counter 
+                  << " event from a file containing " 
+                  << (long long int) m_ebfParser->eventCount() 
+                  << " events" << endreq;
           *(irfIt) = m_evtEnd;
         }
         return *irfIt;
