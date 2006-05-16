@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfErrorCnv.cxx,v 1.5 2005/03/20 06:50:51 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfErrorCnv.cxx,v 1.1 2005/06/10 06:24:26 heather Exp $
 //
 // Description:
 //      LdfErrorCnv is the concrete converter for the event header on the TDS /Event
@@ -47,7 +47,9 @@ StatusCode LdfErrorCnv::createObj(IOpaqueAddress* ,
 
             if (!errLdf->exist()) continue;
             unsigned short towerId = myLatData->getTower(i)->getTowerId();
-            LdfEvent::TowerErrorData err(towerId, errLdf->cal(), errLdf->tkr(), errLdf->phs(), errLdf->tmo());
+            LdfEvent::TowerErrorData err(towerId, errLdf->cal(), errLdf->tkr(),
+                                         errLdf->phs(), errLdf->tmo());
+            err.setTkrFifoFullCol(errLdf->tkrFifoFull());
             errCol->addTowerError(err);
         }
     }
