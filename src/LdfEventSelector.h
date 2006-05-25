@@ -30,7 +30,7 @@ class LdfSelectorContext;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.7 2006/02/21 17:34:25 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.8 2006/05/24 04:46:02 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -182,7 +182,7 @@ private:
     NONE     //When there is no input
   };
     
-  typedef std::list<std::string>   ListName;
+ // typedef std::list<std::string>   ListName;
     
   //! Used internally to get the MaxEvent from the ApplicationMgr
   StatusCode LdfEventSelector::getMaxEvent();
@@ -191,13 +191,13 @@ private:
   StringProperty        m_storageType;
 
   /// Job options parameter. List of input data files
-  StringArrayProperty   m_inputList;
+  //StringArrayProperty   m_inputList;
 
   /// same info as m_storageType, but as enum
   CriteriaType          m_criteriaType;
 
   //LdfEvtIterator        m_evtEnd;
-  ListName*             m_inputDataList;
+  //ListName*             m_inputDataList;
   IDataProviderSvc*     m_eventDataSvc;
   //LdfEvtIterator*       m_it; 
 //  IntegerProperty       m_evtMax;  // see below
@@ -207,7 +207,7 @@ private:
   IntegerProperty       m_ebfDebugLevel;  // If 0 (the default) no debug.
   IntegerProperty       m_sweepSearch; // If 0, skip search
   IAddressCreator*      m_addrCreator;
-  //HMKCLID                  m_rootCLID;
+  CLID                  m_rootCLID;
   IntegerProperty       m_gemCheck; // If 0 (default) no GEM condition summary
                                     // check, other check for zero and print
                                     // log message
