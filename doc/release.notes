@@ -3,6 +3,8 @@ Package LdfConverter
 Coordinator:H.Kelly
 @verbatim
  
+v2r7gr1 16-Jun-2006 HMK Continue processing event even if missing CAL readouts
+         in ALLRANGE
 v2r7    16-May-2006 HMK store error contribution in eventFlags and really
         store TKR fifo errors in their full glory
 v2r6    14-Apr-2006 HMK Check event count against CHS/eventFile's header
