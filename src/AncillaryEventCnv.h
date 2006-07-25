@@ -4,6 +4,7 @@
 #include "LdfBaseCnv.h"
 
 //#include "Event/TopLevel/DigiEvent.h"
+#include "AdfEvent/AdfEvent.h"
 
 // Abstract factory to create the converter
 template <class TYPE> class CnvFactory;
@@ -13,7 +14,7 @@ template <class TYPE> class CnvFactory;
  * @brief Concrete converter for the AncillaryEvent stored in the TDS 
  * /Event/AncillaryEvent
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/AncillaryEventCnv.h,v 1.3 2005/01/04 20:36:29 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/AncillaryEventCnv.h,v 1.1 2006/07/24 20:04:42 heather Exp $
  */ 
 
 class AncillaryEventCnv : public LdfBaseCnv { 

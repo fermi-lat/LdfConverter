@@ -3,7 +3,7 @@
 * @brief This is needed for forcing the linker to load all components
 * of the library.
 *
-*  $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/Dll/LdfConverter_load.cxx,v 1.8.2.1 2006/04/12 07:20:58 heather Exp $
+*  $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/Dll/LdfConverter_load.cxx,v 1.9 2006/05/11 17:02:36 heather Exp $
 */
 
 #include "GaudiKernel/DeclareFactoryEntries.h"
@@ -23,6 +23,8 @@ DECLARE_FACTORY_ENTRIES(LdfConverter) {
   DECLARE_CONVERTER( McEventCnv );
   DECLARE_CONVERTER( MetaEventCnv );
   DECLARE_CONVERTER( CcsdsCnv );
+  DECLARE_CONVERTER( AncillaryEventCnv );
+  DECLARE_CONVERTER( AdfEventCnv );
 
 }
   
