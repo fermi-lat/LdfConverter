@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.24 2006/05/25 23:43:56 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.25 2006/05/31 19:01:36 heather Exp $
 // 
 // Description:
 
@@ -489,6 +489,31 @@ StatusCode LdfEventSelector::next(Context& refCtxt, int /* jump */ ) const  {
                             return StatusCode::FAILURE; // HMK thnk I return failure here for context  - that will terminate loop
                             break;
                         } else {
+
+
+                            // Check for ADF Header or Trailer
+                            if(ldfReader::LatData::instance()->adfHdrTlr()) {
+                                // Move file pointer for the next event
+                                log << MSG::DEBUG << "Found ADF Hdr or Tlr" << endreq;
+                                int ret = m_ebfParser->nextEvent();
+                                if (ret != 0) {
+                                    log << MSG::INFO << "Input event source exhausted" << endreq;
+                                    if (counter != m_ebfParser->eventCount())
+                                        log << MSG::WARNING << "Number of events process " 
+                                            << (long long int) counter 
+                                            << " does not match number of events in input file "
+                                            << (long long int) m_ebfParser->eventCount() 
+                                            << endreq;
+                                    else
+                                       log << MSG::INFO << "Processed " 
+                                           << (long long int) counter 
+                                           << " event from a file containing " 
+                                           << (long long int) m_ebfParser->eventCount() 
+                                           << " events" << endreq;
+                                    return StatusCode::FAILURE;  // not sure if we're skipping the last event or not
+                                }
+                                continue;
+                            }
 
                             // If a StartEventNumber JO parameter is specified, check the
                             // EventSequence if we've reached the event in question.
