@@ -30,7 +30,7 @@ class LdfSelectorContext;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.8 2006/05/24 04:46:02 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.9 2006/05/25 23:43:56 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -218,6 +218,7 @@ private:
                                             // with event number N as stored
                                             // in LDF
 
+  std::string            m_acdRemap; // For beamtest 2006
 
 // From gaudi v18r1 EventSelector in GaudiSvc
   //IIncidentSvc*          m_incidentSvc;
