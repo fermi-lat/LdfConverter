@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/AdfEventCnv.cxx,v 1.1 2006/07/24 20:04:42 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/AdfEventCnv.cxx,v 1.2 2006/07/25 05:54:03 heather Exp $
 //
 // Description:
 //      AdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -33,10 +33,15 @@ StatusCode AdfEventCnv::createObj(IOpaqueAddress* ,
     // Purpose and Method:  This converter will create an AdfEvent on
     //   the TDS.
     MsgStream log(msgSvc(), "AdfEventCnv");
-    AncillaryData::AdfEvent *adf = new AncillaryData::AdfEvent();
-    refpObject  = adf;
     // Retrieve the LAT data for this event 
     const ldfReader::AdfData& adfLdf = ldfReader::LatData::instance()->getAdf();
+    if (!adfLdf.exist()){
+        refpObject = 0;
+        return StatusCode::FAILURE;
+    }
+
+    AncillaryData::AdfEvent *adf = new AncillaryData::AdfEvent();
+    refpObject  = adf;
     const unsigned char* buffer = adfLdf.buffer();
     unsigned int *header = &((unsigned int*)buffer)[0];
     AncillaryData::EventSummaryData summaryData;
