@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.26 2006/07/26 05:28:26 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.27 2006/07/28 23:29:09 heather Exp $
 // 
 // Description:
 
@@ -298,6 +298,7 @@ LdfEventSelector::LdfEventSelector( const std::string& name,
     declareProperty("StartEventNumber", m_startEventNumber = 0);
     declareProperty("FileName", m_fileName="");
     declareProperty("AcdRemapFile", m_acdRemap="");
+    declareProperty("IgnoreSegFault", m_ignoreSegFault=0);
 
     //Here we get the maxEvt number from the aplication mgr property;
     //Sets the environment variable m_evtMax;
@@ -370,6 +371,8 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
             if (m_acdRemap != "")
                 m_ebfParser->setAcdRemap(m_acdRemap);
+            if (m_ignoreSegFault)
+                m_ebfParser->setIgnoreSegFault();
 
         } catch(LdfException &e) {
             log << MSG::ERROR << "LdfException: " << e.what() << endreq;
@@ -394,6 +397,8 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             m_ebfParser->setDebug((m_ebfDebugLevel != 0));
             if (m_acdRemap != "")
                 m_ebfParser->setAcdRemap(m_acdRemap);
+            if (m_ignoreSegFault)
+                m_ebfParser->setIgnoreSegFault();
 
         } catch(LdfException &e) {
             log << MSG::ERROR << "LdfException: " << e.what() << endreq;
