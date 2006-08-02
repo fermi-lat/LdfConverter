@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.27 2006/07/28 23:29:09 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.28 2006/08/01 15:49:50 heather Exp $
 // 
 // Description:
 
@@ -370,7 +370,11 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
                 log << MSG::DEBUG << "Creating LdfParser failed" << endreq;
             m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
             if (m_acdRemap != "")
-                m_ebfParser->setAcdRemap(m_acdRemap);
+                if (m_ebfParser->setAcdRemap(m_acdRemap) < 0) 
+                    log << MSG::WARNING << "Failed to read ACD remap file" << endreq;
+                else 
+                    log << MSG::INFO << "Opened ACD remap file: " <<
+                           m_acdRemap << endreq;
             if (m_ignoreSegFault)
                 m_ebfParser->setIgnoreSegFault();
 
@@ -396,7 +400,11 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             m_ebfParser = new ldfReader::LdfParser(m_fileName, true, m_instrument);
             m_ebfParser->setDebug((m_ebfDebugLevel != 0));
             if (m_acdRemap != "")
-                m_ebfParser->setAcdRemap(m_acdRemap);
+                if (m_ebfParser->setAcdRemap(m_acdRemap) < 0) 
+                    log << MSG::WARNING << "Failed to read ACD remap file" << endreq;
+                else 
+                    log << MSG::INFO << "Opened ACD remap file: " <<
+                           m_acdRemap << endreq;
             if (m_ignoreSegFault)
                 m_ebfParser->setIgnoreSegFault();
 
