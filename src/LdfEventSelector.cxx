@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.29 2006/08/02 20:07:11 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.30 2006/08/09 05:46:26 heather Exp $
 // 
 // Description:
 
@@ -509,10 +509,14 @@ StatusCode LdfEventSelector::next(Context& refCtxt, int /* jump */ ) const  {
                     // Allows JO to skip the search for the sweep events
                     // no skipping for LSF (CCSDSFILEs)
                     if ((m_sweepSearch == 0) && (m_criteriaType != CCSDSFILE) ){
-                        log << MSG::WARNING 
-                            << "Skipping check for first Sweep Event - "
-                            << " ARE YOU SURE YOU WANT TO DO THIS???" << endreq;
+                        static short sweepFlag = 0;
+                        if (sweepFlag < 5)
+                            log << MSG::WARNING 
+                                << "Skipping check for first Sweep Event - "
+                                << " ARE YOU SURE YOU WANT TO DO THIS???" 
+                                << endreq;
                         findFirstMarkerFive = true;
+                        ++sweepFlag;
                     }
                     if (m_criteriaType == CCSDSFILE) findFirstMarkerFive = true;
 
