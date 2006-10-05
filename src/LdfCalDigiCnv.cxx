@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.3 2005/01/04 20:36:29 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.4 2005/07/14 06:57:49 heather Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -72,8 +72,11 @@ StatusCode LdfCalDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
                     for (j=0; j<4; j++) {
                         const ldfReader::CalDigi::CalReadout *readout = it->second->getXtalReadout(j);
                         if (!readout) {
-                            printf("LdfCalDigiCnv:  Faen!  In ALLRANGE mode but not all range readouts are populated!\n");
-                            exit(1);
+                            //printf("LdfCalDigiCnv:  Faen!  In ALLRANGE mode but not all range readouts are populated!\n");
+                            //exit(1);
+                            //I&T requests that we continue to process this data
+                            // even if ranges are missing
+                            continue;
                         }
                         char rangeP = readout->getRange(ldfReader::CalDigi::POS);
                         unsigned short adcP = readout->getAdc(ldfReader::CalDigi::POS);
