@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.9 2006/03/05 09:23:28 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.cxx,v 1.10 2006/03/07 07:25:19 heather Exp $
 //
 // Description:
 //      LdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -80,12 +80,10 @@ StatusCode LdfEventCnv::createObj(IOpaqueAddress* ,
     TimeStamp tdsTimeStamp(ldfReader::LatData::instance()->getTimeInSecTds());
     header->setTime(tdsTimeStamp);
 
-    // Also set the LiveTime using the LDF.  LiveTime in LDF is in counts
-    // where each count corresponds to 50 nsec.
-    ldfReader::GemData ldfGem = ldfReader::LatData::instance()->getGem();
-    // Convert to seconds.. where nanoseconds correspond to 1 billion seconds
-    double ltSec = ldfGem.liveTime() * 50./1000000000.0;
-    header->setLivetime(ltSec);
+    // Set the LiveTime on the TDS to -1 
+    // Need the livetime DB to set livetime since mission start, so we'll just 
+    // set it to some dummy value for now
+    header->setLivetime(-1.);
 
 
     // initialize the trigger to zero to promote processing if TriggerAlg is
