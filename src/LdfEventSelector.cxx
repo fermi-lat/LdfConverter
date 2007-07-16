@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.31 2006/08/09 23:04:15 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.32 2007/07/05 20:13:05 heather Exp $
 // 
 // Description:
 
@@ -320,10 +320,11 @@ LdfEventSelector::~LdfEventSelector() {
 
 bool fileExists(const std::string &fileName) {
 
-    struct stat checkFile;
 #ifdef WIN32
+    struct _stat checkFile;
     if (_stat(fileName.c_str(), &checkFile) == -1)
 #else
+    struct stat checkFile;
     if (stat(fileName.c_str(), &checkFile) == -1)
 #endif
       return false;
