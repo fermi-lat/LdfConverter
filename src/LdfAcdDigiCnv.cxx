@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.11 2007/08/24 04:24:40 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.12 2008/04/21 03:27:18 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -51,7 +51,7 @@ StatusCode LdfAcdDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
     /// in Figure 124 and read the description in Section 1.6.5
 
     // AKA GEM hitmap.  See the GEM documetation cited above Section 4.9
-    const GemDataTileList& tileList = ldfGem.tileList();
+    //const GemDataTileList& tileList = ldfGem.tileList();
 
     const std::map<const char*, ldfReader::AcdDigi*> acdCol = myLatData->getAcdCol();
     std::map<const char*, ldfReader::AcdDigi*>::const_iterator thisAcdDigi;
