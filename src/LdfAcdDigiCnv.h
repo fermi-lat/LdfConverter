@@ -12,7 +12,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfAcdDigiCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.3 2004/12/18 17:23:19 usher Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.h,v 1.4 2005/01/04 20:36:28 heather Exp $
  */ 
 
 class LdfAcdDigiCnv : public LdfBaseCnv { 
@@ -40,6 +40,9 @@ protected:
   void LdfAcdDigiCnv::base10ToAcdId(unsigned int val, short &lay, short &face, 
                           short &row, short &col);
 
+
+  bool createAcdDigi(Event::AcdDigiCol*& digiCol, unsigned int bitWord, int face, int offset, 
+                     int maxRow, int maxCol);
 
 };
 
