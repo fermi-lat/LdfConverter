@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.14 2008/04/25 15:37:26 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.15 2008/04/30 20:48:38 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -137,6 +137,10 @@ StatusCode LdfAcdDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
     }
 
     const std::map<const char*, ldfReader::AcdDigi*> acdCol = myLatData->getAcdCol();
+    if (digiCol->size() != acdCol.size()) {
+        log << MSG::DEBUG << "GEM created AcdDigis: " << digiCol->size()
+            << " AcdDigis found in hitmap: " << acdCol.size() << endreq;
+    }
     std::map<const char*, ldfReader::AcdDigi*>::const_iterator thisAcdDigi;
     
     log << MSG::DEBUG << "found acddigis: " << acdCol.size() << endreq;
