@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/Attic/EbfCnv.cxx,v 1.1.4.1 2008/06/26 19:21:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/EbfCnv.cxx,v 1.2 2008/07/03 16:47:38 heather Exp $
 //
 // Description:
 //      CcsdsCnv is the concrete converter for the CCSDS items on TDS 
@@ -37,7 +37,7 @@ StatusCode EbfCnv::createObj(IOpaqueAddress* ,
     EbfWriterTds::Ebf *me = new EbfWriterTds::Ebf();
     unsigned int len;
     char *data = lsfEbf.get(len);
-    log << MSG::INFO << "EBF len " << len  << " first byte "
+    log << MSG::DEBUG << "EBF len " << len  << " first byte "
         << std::hex << (unsigned int)(data[0]) << std::dec << endreq;
     me->set(data,len);
     refpObject = me;
