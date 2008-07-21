@@ -1,7 +1,7 @@
 //##############################################################
 //
 // basic Job options file for a test_EbfConveter.exe
-// $Header: /nfs/slac/g/glast/ground/cvs/EbfConverter/src/test/EbfToRootOptions.txt,v 1.1 2003/07/31 18:01:06 cohen Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/test/LdfToRootOptions.txt,v 1.1.1.1 2004/05/13 22:02:49 heather Exp $
 
 // primary DLLs, including auditor 
 
@@ -25,7 +25,7 @@ EventPersistencySvc.CnvServices = {"EventCnvSvc"};
 EventSelector.StorageType = "EBFFITS";
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5.ebf"};
 // EventSelector.InputList = {"$(ldfReaderROOT)/src/test/muon-5_1.fits"};
-// EventSelector.InputList = {"$(LDFCONVERTERROOT)/data/ebf030502182112.fits"};
+// EventSelector.InputList = {"$(LDFCONVERTERDATAPATH)/ebf030502182112.fits"};
 EventSelector.InputList = {"/nfs/farm/g/glast/u03/EM2003/miniTower/ebf030507023417.fits"};
 // Supported instruments for now are EM and LAT.  Default is LAT.
 EventSelector.Instrument = "EM";
