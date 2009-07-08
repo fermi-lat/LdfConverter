@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.33 2007/07/16 14:44:50 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.34 2008/04/17 16:35:11 heather Exp $
 // 
 // Description:
 
@@ -356,7 +356,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             m_criteriaType = LDFFILE;
 
             m_ebfParser = new ldfReader::SocketParser(m_server);
-            m_ebfParser->setDebug((m_ebfDebugLevel != 0));
+            m_ebfParser->setDebug(m_ebfDebugLevel);
             m_ebfParser->setOldStyleRunId((m_oldStyleRunId != 0));
             if (m_acdRemap != "")
                 if (m_ebfParser->setAcdRemap(m_acdRemap) < 0) 
@@ -388,7 +388,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             log << MSG::DEBUG << "ctor DfiParser " << m_fileName << endreq;
             m_ebfParser = new ldfReader::DfiParser(m_fileName);
             m_ebfParser->printHeader();
-            m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
+            m_ebfParser->setDebug(m_ebfDebugLevel);
             m_ebfParser->setOldStyleRunId((m_oldStyleRunId != 0));
             log << MSG::DEBUG << "return from ctor" << endreq;
         } catch(...) {
@@ -413,7 +413,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             m_ebfParser = new ldfReader::LdfParser(m_fileName, false, m_instrument);
             if (!m_ebfParser) 
                 log << MSG::DEBUG << "Creating LdfParser failed" << endreq;
-            m_ebfParser->setDebug((m_ebfDebugLevel != 0) );
+            m_ebfParser->setDebug(m_ebfDebugLevel);
             m_ebfParser->setOldStyleRunId((m_oldStyleRunId != 0));
             if (m_acdRemap != "")
                 if (m_ebfParser->setAcdRemap(m_acdRemap) < 0) 
@@ -444,7 +444,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
             }
 
             m_ebfParser = new ldfReader::LdfParser(m_fileName, true, m_instrument);
-            m_ebfParser->setDebug((m_ebfDebugLevel != 0));
+            m_ebfParser->setDebug(m_ebfDebugLevel);
             m_ebfParser->setOldStyleRunId((m_oldStyleRunId != 0));
             if (m_acdRemap != "")
                 if (m_ebfParser->setAcdRemap(m_acdRemap) < 0) 
