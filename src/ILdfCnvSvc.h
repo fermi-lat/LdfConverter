@@ -10,7 +10,7 @@
 *
 * Based on ISicbEventCnvSvc
 *
-* $Header$
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/ILdfCnvSvc.h,v 1.1.1.1 2004/05/13 22:02:47 heather Exp $
 */
 class ILdfCnvSvc : virtual public IInterface      {
 public:
@@ -23,7 +23,8 @@ public:
     Leaf(const std::string& p, const CLID& c, const std::string& b, long u)
       : userParameter(u), path(p), bank(b), clid(c) {}
     Leaf(const Leaf& copy) 
-      : userParameter(copy.userParameter), path(copy.path), bank(copy.bank), 
+      : std::vector<Leaf*>(copy),userParameter(copy.userParameter), 
+        path(copy.path), bank(copy.bank), 
         clid(copy.clid) {}
     Leaf& operator=(const Leaf& copy)   {
       path = copy.path;
