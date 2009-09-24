@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.34 2008/04/17 16:35:11 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.35 2009/07/08 02:23:42 heather Exp $
 // 
 // Description:
 
@@ -769,6 +769,11 @@ StatusCode LdfEventSelector::getMaxEvent()
     IntegerProperty evtMax("EvtMax",0);
     status = appPropMgr->getProperty( &evtMax );
     if (status.isFailure()) return status;
+
+    // If JO sets EvtMax to zero, set to INT_MAX, and allow the input
+    // file determine when to terminate the event loop
+    if (evtMax == 0) 
+        evtMax = INT_MAX;
 
     int max_event = evtMax.value();
 
