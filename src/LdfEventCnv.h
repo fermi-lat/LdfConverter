@@ -12,7 +12,7 @@ template <class TYPE> class CnvFactory;
 /** @class LdfEventCnv
  * @brief Concrete converter for the Event header stored in the TDS /Event
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.h,v 1.2 2004/12/18 17:23:19 usher Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventCnv.h,v 1.3 2005/01/04 20:36:29 heather Exp $
  */ 
 
 class LdfEventCnv : public LdfBaseCnv { 
@@ -25,7 +25,7 @@ public:
     return CLID_Event;
   }
 
-protected:
+//protected:
 
   LdfEventCnv(ISvcLocator* svc);
 
@@ -42,3 +42,4 @@ protected:
 
 
 #endif // LdfEventCnv_H
+

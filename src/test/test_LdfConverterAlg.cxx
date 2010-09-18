@@ -26,7 +26,7 @@
  * @brief Takes data from the TDS to test reading from EBF files
  *
  * @author Heather Kelly
- * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.10 2006/02/25 00:18:36 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.11 2006/07/25 05:54:04 heather Exp $
  */
 
 class test_LdfConverterAlg : public Algorithm
@@ -57,8 +57,9 @@ private:
     
 };
 
-static const AlgFactory<test_LdfConverterAlg>  Factory;
-const IAlgFactory& test_LdfConverterAlgFactory = Factory;
+//static const AlgFactory<test_LdfConverterAlg>  Factory;
+//const IAlgFactory& test_LdfConverterAlgFactory = Factory;
+DECLARE_ALGORITHM_FACTORY(test_LdfConverterAlg);
 
 
 test_LdfConverterAlg::test_LdfConverterAlg(const std::string& name, ISvcLocator* pSvcLocator) : 
