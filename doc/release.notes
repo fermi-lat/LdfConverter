@@ -4,6 +4,7 @@ Coordinator:H.Kelly
 @verbatim
  * EOH *
 
+ LdfConverter-04-04-02-gr01 06-Oct-2010 hmk upgrade gaudi v21r7 along branch
  LdfConverter-04-04-02 12-Jun-2010    jrb upgrades for SCons builds
 LdfConverter-04-04-01 10-Nov-2009 HMK Use EvtMax to denote reading in a 
         complete input file

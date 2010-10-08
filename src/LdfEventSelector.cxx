@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.35.6.1 2009/09/24 14:09:37 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.36.20.1 2010/09/18 03:50:27 heather Exp $
 // 
 // Description:
 
@@ -29,8 +29,9 @@
 
 // Instantiation of a static factory class used by clients to create
 // instances of this service
-static const SvcFactory<LdfEventSelector> s_factory;
-const ISvcFactory& LdfEventSelectorFactory = s_factory;
+//static const SvcFactory<LdfEventSelector> s_factory;
+//const ISvcFactory& LdfEventSelectorFactory = s_factory;
+DECLARE_SERVICE_FACTORY(LdfEventSelector);
 
 
 ///NEW
@@ -745,10 +746,10 @@ StatusCode LdfEventSelector::next(Context& refCtxt, int /* jump */ ) const  {
 
 
 StatusCode LdfEventSelector::queryInterface(const InterfaceID& riid, void** ppvInterface)  {
-    if ( riid == IID_IEvtSelector )  {
+    if ( riid == IEvtSelector::interfaceID() )  {
         *ppvInterface = (IEvtSelector*)this;
     }
-    else if ( riid == IID_IProperty )  {
+    else if ( riid == IProperty::interfaceID() )  {
         *ppvInterface = (IProperty*)this;
     }
     else   {
@@ -762,7 +763,7 @@ StatusCode LdfEventSelector::getMaxEvent()
 {
     IProperty* appPropMgr=0;
     StatusCode status = 
-        serviceLocator()->getService("ApplicationMgr", IID_IProperty,
+        serviceLocator()->getService("ApplicationMgr", IProperty::interfaceID(),
         reinterpret_cast<IInterface*&>( appPropMgr ));
     if( status.isFailure() ) return status;
 
@@ -782,4 +783,5 @@ StatusCode LdfEventSelector::getMaxEvent()
     m_evtMax = max_event;
     return status;
 }
+
 
