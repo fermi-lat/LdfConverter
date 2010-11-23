@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.15 2008/04/30 20:48:38 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.16.274.1 2010/11/23 16:51:50 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -203,7 +203,12 @@ StatusCode LdfAcdDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
         } else {
             findDigi->second->init(pha, hitMapArr, acceptMapArr, cnoArr);
             findDigi->second->initLdfParameters(tileName, tileNumber, range, error);
-            findDigi->second->setNinja(false);
+            if ((hitMapArr[0] == true) && (acceptMapArr[0] == false) )
+                findDigi->second->setNinja(true);
+            else if ((hitMapArr[1] == true) && (acceptMapArr[1] == false) )
+                findDigi->second->setNinja(true);
+            else
+                findDigi->second->setNinja(false);
         }
         
     }
