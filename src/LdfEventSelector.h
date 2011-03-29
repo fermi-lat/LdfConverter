@@ -30,7 +30,7 @@ class LdfSelectorContext;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.13 2008/04/17 16:35:11 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.13.302.1 2011/03/07 19:56:47 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -262,6 +262,7 @@ private:
   /// JO parameter denotes whether to insert an empty event if we skip events
   bool m_insertEmptyEvent;
   std::string m_eventIndicesToSkipEnv;
+  bool m_printCounter;
 };
 
 #endif  // LdfEventSelector_H

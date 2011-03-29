@@ -4,6 +4,7 @@ Coordinator:H.Kelly
 @verbatim
  * EOH *
 
+v4r3p4gr04 28-Mar-2011 HMK JIRA GRINF-54 printing event index option
 v4r3p4gr03 07-Mar-2011 HMK JIRA GRINF-54
 v4r3p4gr02 22-Nov-2010 HMK set AcdDigi Ninja bit if either PMT has a hit map bit
           set but no associated accept map bit

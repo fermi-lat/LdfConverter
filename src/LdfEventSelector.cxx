@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.35.6.1 2009/09/24 14:09:37 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.35.6.2 2011/03/07 19:56:47 heather Exp $
 // 
 // Description:
 
@@ -336,6 +336,7 @@ LdfEventSelector::LdfEventSelector( const std::string& name,
     declareProperty("SocketConnection", m_socket = 0);
     // default server is 60 - chosen for the beamtest
     declareProperty("SocketServer", m_server = 60);
+    declareProperty("PrintEventIndex", m_printCounter=false);
 
     //Here we get the maxEvt number from the aplication mgr property;
     //Sets the environment variable m_evtMax;
@@ -593,6 +594,9 @@ StatusCode LdfEventSelector::next(Context& refCtxt, int /* jump */ ) const  {
                     // Once we find the eventNumber, we carry on from there
 
                     while ((!DONE) || (!findFirstMarkerFive)) {
+                        if (m_printCounter) 
+                            std::cout << "Reading Event Index: " << counter << std::endl;
+
                         int status = m_ebfParser->loadData();
                         if (status < 0) {
                             log << MSG::INFO << "Failed to get Event" << endreq;
