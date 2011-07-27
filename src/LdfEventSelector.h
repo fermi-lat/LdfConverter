@@ -30,7 +30,7 @@ class LdfSelectorContext;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.12 2006/08/09 05:46:26 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.13.302.2 2011/03/29 04:40:00 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -172,6 +172,9 @@ public:
   //HMKtypedef std::vector<StringProperty>            Properties;
     
 private:
+
+  void checkForSkippedEvents(unsigned long long& counter, bool &lastEventFlag);
+
   enum CriteriaType { 
     EBFFILE,
     EBFFITS,
@@ -250,6 +253,16 @@ private:
   int                   m_evtMax; // Obsolete parameter
   /// Printout frequency
   int                   m_evtPrintFrequency;
+  /// Potential list of gem ids to skip
+  UnsignedLongLongArrayProperty m_gemIdSkipList;
+  std::vector<unsigned long long> m_gemIdSkipVec;
+  /// Potential list of event indices to skip
+  UnsignedLongLongArrayProperty m_eventIndexSkipList;
+  std::vector<unsigned long long> m_eventIndexSkipVec;
+  /// JO parameter denotes whether to insert an empty event if we skip events
+  bool m_insertEmptyEvent;
+  std::string m_eventIndicesToSkipEnv;
+  bool m_printCounter;
 };
 
 #endif  // LdfEventSelector_H
