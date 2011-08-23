@@ -1,7 +1,7 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/SConscript,v 1.5.6.4 2011/03/29 04:44:01 heather Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/SConscript,v 1.14 2011/07/27 14:22:03 heather Exp $
 # Authors: Heather Kelly <heather@lheapop.gsfc.nasa.gov>, Tracy Usher   <usher@slac.stanford.edu>
-# Version: LdfConverter-04-04-06
+# Version: LdfConverter-04-04-07
 
 Import('baseEnv')
 Import('listFiles')
