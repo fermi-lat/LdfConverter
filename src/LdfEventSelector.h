@@ -30,7 +30,7 @@ class LdfSelectorContext;
 * number of events run my changing the EvtMax property of this Svc. 
 * Examples of how to do this can be found in the GuiSvc.
 *
-* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.13.302.2 2011/03/29 04:40:00 heather Exp $
+* $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.h,v 1.14 2011/07/27 14:22:04 heather Exp $
 */
 class LdfEventSelector : virtual public Service, 
                          virtual public IEvtSelector,
@@ -173,7 +173,7 @@ public:
     
 private:
 
-  void checkForSkippedEvents(unsigned long long& counter, bool &lastEventFlag);
+  void checkForSkippedEvents(unsigned long long& counter, bool &lastEventFlag) const;
 
   enum CriteriaType { 
     EBFFILE,
