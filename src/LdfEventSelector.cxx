@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfEventSelector.cxx,v 1.39 2011/08/23 17:07:28 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfEventSelector.cxx,v 1.40 2011/12/12 20:53:01 heather Exp $
 // 
 // Description:
 
@@ -27,6 +27,7 @@
 #include <cstring>
 
 #include <sys/stat.h>
+#include <limits.h>
 
 // Instantiation of a static factory class used by clients to create
 // instances of this service
