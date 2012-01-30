@@ -1,7 +1,7 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/SConscript,v 1.14 2011/07/27 14:22:03 heather Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/SConscript,v 1.19 2012/01/23 19:46:45 jrb Exp $
 # Authors: Heather Kelly <heather@lheapop.gsfc.nasa.gov>, Tracy Usher   <usher@slac.stanford.edu>
-# Version: LdfConverter-04-04-07
+# Version: LdfConverter-04-04-07-gr01
 
 Import('baseEnv')
 Import('listFiles')
@@ -10,8 +10,8 @@ progEnv = baseEnv.Clone()
 libEnv = baseEnv.Clone()
 
 libEnv.Tool('addLinkDeps', package='LdfConverter', toBuild='component')
-LdfConverter = libEnv.SharedLibrary('LdfConverter',
-                                    listFiles(['src/*.cxx','src/Dll/*.cxx']))
+LdfConverter=libEnv.ComponentLibrary('LdfConverter',
+                                     listFiles(['src/*.cxx']))
 
 progEnv.AppendUnique(CPPDEFINES = ['_FILE_OFFSET_BITS=64'])
 progEnv.Tool('LdfConverterLib')
