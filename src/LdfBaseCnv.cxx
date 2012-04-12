@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header$
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfBaseCnv.cxx,v 1.1.1.1 2004/05/13 22:02:47 heather Exp $
 //
 // Description:
 //      LdfBaseCnv is the base class defining all GLAST converters.
@@ -73,14 +73,19 @@ StatusCode LdfBaseCnv::initialize()   {
     //   Access the EventCnvSvc to create an association between converters 
     //   and paths within the TDS, using the vector of leaves and the
     //   declareObject methods available in each specific converter.
+    MsgStream log(msgSvc(), "LdfBaseCnv");
     StatusCode status = Converter::initialize();
+    log << MSG::DEBUG << "LdfBaseCnv::init" << endreq;
     if ( status.isSuccess() )   {
+       log << MSG::DEBUG << "Pas Converter::init" << endreq;
         IService* isvc = 0;
         status = serviceLocator()->service("EventCnvSvc", isvc, true);
         if ( status.isSuccess() )   {
             status = isvc->queryInterface(IID_ILdfBaseCnv, (void**)&m_CnvSvc);
             if ( status.isSuccess() )   {
+                 log << MSG::DEBUG << "Pas query interface" << endreq;
                 for ( std::vector<ILdfCnvSvc::Leaf>::iterator i = m_leaves.begin(); i != m_leaves.end(); i++ )    {
+                    log << MSG::DEBUG << "Calling declareObj" << endreq;
                     m_CnvSvc->declareObject(*i);
                 }
             }

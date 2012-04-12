@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDiagnosticCnv.cxx,v 1.6 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfDiagnosticCnv.cxx,v 1.5.742.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      LdfDiagnosticCnv is the concrete converter for the event header on the TDS /Event
@@ -15,8 +15,10 @@
 #include "ldfReader/data/LatData.h"
 
 #include "LdfEvent/DiagnosticData.h"
+#include "LdfBaseCnv.h"
 
-class LdfDiagnosticCnv : public Converter //virtual public IGlastCnv, public Converter 
+class LdfDiagnosticCnv : public LdfBaseCnv
+//public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfDiagnosticCnv>;
@@ -39,11 +41,13 @@ public:
     static const CLID&         classID()     {return CLID_LdfDiagnosticData;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_LdfDiagnosticData;}
@@ -71,12 +75,16 @@ private:
 //const ICnvFactory& MCEventCnvFactory = s_factory;
 DECLARE_CONVERTER_FACTORY ( LdfDiagnosticCnv );
 
-LdfDiagnosticCnv::LdfDiagnosticCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_LdfDiagnosticData, svc)
+LdfDiagnosticCnv::LdfDiagnosticCnv(ISvcLocator* svc) 
+: LdfBaseCnv(classID(), svc)
+//: Converter(TEST_StorageType, CLID_LdfDiagnosticData, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
     m_path = "/Event/Diagnostic";
+    declareObject("/Event/Diagnostic", objType(), "PASS");
 }
 
+/*
 StatusCode LdfDiagnosticCnv::initialize() 
 {
     StatusCode status = Converter::initialize();
@@ -88,6 +96,7 @@ StatusCode LdfDiagnosticCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 StatusCode LdfDiagnosticCnv::createObj(IOpaqueAddress* , 
                                     DataObject*& refpObject) {

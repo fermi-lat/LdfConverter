@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.7 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.6.658.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -16,8 +16,10 @@
 
 #include "ldfReader/data/LatData.h"
 
+#include "LdfBaseCnv.h"
 
-class  LdfCalDigiCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  LdfCalDigiCnv : public LdfBaseCnv
+// public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfCalDigiCnv>;
@@ -40,12 +42,13 @@ public:
     static const CLID&         classID()     {return CLID_CalDigi;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
-
+*/
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_CalDigi;}
 
@@ -73,12 +76,15 @@ private:
 DECLARE_CONVERTER_FACTORY ( LdfCalDigiCnv );
 
 LdfCalDigiCnv::LdfCalDigiCnv(ISvcLocator* svc)
-: Converter(TEST_StorageType, CLID_CalDigi, svc)
+: LdfBaseCnv(classID(), svc)
+//: Converter(TEST_StorageType, CLID_CalDigi, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
     m_path = "/Event/Digi/CalDigiCol";
+    declareObject("/Event/Digi/CalDigiCol", objType(), "PASS");
 }
 
+/*
 StatusCode LdfCalDigiCnv::initialize() {
     return Converter::initialize();
 }
@@ -86,7 +92,7 @@ StatusCode LdfCalDigiCnv::initialize() {
 StatusCode LdfCalDigiCnv::finalize() {
     return Converter::finalize();
 }
-
+*/
 StatusCode LdfCalDigiCnv::createObj(IOpaqueAddress* , DataObject*& refpObject) {
     // Purpose and Method:  This converter will create an empty EventHeader on
     //   the TDS.

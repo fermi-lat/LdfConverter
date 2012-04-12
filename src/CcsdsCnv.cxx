@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/CcsdsCnv.cxx,v 1.3 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/CcsdsCnv.cxx,v 1.2.734.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      CcsdsCnv is the concrete converter for the CCSDS items on TDS 
@@ -16,12 +16,13 @@
 #include "GaudiKernel/MsgStream.h"
 #include "GaudiKernel/IOpaqueAddress.h"
 #include "LdfEvent/LsfCcsds.h"
+#include "LdfBaseCnv.h"
 
 
 #include "ldfReader/data/LatData.h"
 #include "lsfData/LsfCcsds.h"
 
-class  CcsdsCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  CcsdsCnv : public LdfBaseCnv //public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<CcsdsCnv>;
@@ -45,10 +46,10 @@ public:
     static const unsigned char storageType() {return TEST_StorageType;}
 
     /// Initialize the converter
-    virtual StatusCode initialize();
+    //virtual StatusCode initialize();
 
     /// Initialize the converter
-    virtual StatusCode finalize();
+    //virtual StatusCode finalize();
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_LsfCcsds;}
@@ -74,13 +75,18 @@ private:
 // instances of this service
 //static CnvFactory<CcsdsCnv> s_factory;
 //const ICnvFactory& CcsdsCnvFactory = s_factory;
+DECLARE_CONVERTER_FACTORY ( CcsdsCnv );
 
-CcsdsCnv::CcsdsCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_LsfCcsds, svc)
+CcsdsCnv::CcsdsCnv(ISvcLocator* svc) 
+: LdfBaseCnv(classID(), svc)
+//: Converter(TEST_StorageType, CLID_LsfCcsds, svc)
 {
     // Here we associate this converter with the /Event/Ccsds path on the TDS.
+    declareObject("/Event/Ccsds", objType(), "PASS");
     m_path = "/Event/Ccsds";
 }
 
+/*
 StatusCode CcsdsCnv::initialize() {
     return Converter::initialize();
 }
@@ -88,6 +94,7 @@ StatusCode CcsdsCnv::initialize() {
 StatusCode CcsdsCnv::finalize() {
     return Converter::finalize();
 }
+*/
 
 StatusCode CcsdsCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {

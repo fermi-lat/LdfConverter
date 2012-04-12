@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfErrorCnv.cxx,v 1.2 2011/12/12 20:53:01 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfErrorCnv.cxx,v 1.1.742.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      LdfErrorCnv is the concrete converter for the event header on the TDS /Event
@@ -16,8 +16,10 @@
 #include "ldfReader/data/LatData.h"
 
 #include "LdfEvent/ErrorData.h"
+#include "LdfBaseCnv.h"
 
-class  LdfErrorCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  LdfErrorCnv : public LdfBaseCnv
+//public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfErrorCnv>;
@@ -40,11 +42,13 @@ public:
     static const CLID&         classID()     {return CLID_LdfErrorData;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_LdfErrorData;}
@@ -72,11 +76,15 @@ private:
 //const ICnvFactory& MCEventCnvFactory = s_factory;
 DECLARE_CONVERTER_FACTORY ( LdfErrorCnv );
 
-LdfErrorCnv::LdfErrorCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_LdfErrorData, svc)
+LdfErrorCnv::LdfErrorCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
+//: Converter(TEST_StorageType, CLID_LdfErrorData, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
     m_path = "/Event/Error";
+    declareObject("/Event/Error", objType(), "PASS");
 }
+
+/*
 
 StatusCode LdfErrorCnv::initialize() 
 {
@@ -89,6 +97,7 @@ StatusCode LdfErrorCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 
 StatusCode LdfErrorCnv::createObj(IOpaqueAddress* , 

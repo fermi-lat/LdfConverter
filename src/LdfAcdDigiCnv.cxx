@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.19 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfAcdDigiCnv.cxx,v 1.18.22.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      LdfAcdDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -18,11 +18,12 @@
 
 #include "idents/AcdId.h"
 #include "facilities/Util.h"
+#include "LdfBaseCnv.h"
 
 #include <map>
 
 
-class  LdfAcdDigiCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  LdfAcdDigiCnv : public LdfBaseCnv //public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfAcdDigiCnv>;
@@ -46,10 +47,10 @@ public:
     static const unsigned char storageType() {return TEST_StorageType;}
 
     /// Initialize the converter
-    virtual StatusCode initialize();
+    //virtual StatusCode initialize();
 
     /// Initialize the converter
-    virtual StatusCode finalize();
+    //virtual StatusCode finalize();
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_AcdDigi;}
@@ -88,13 +89,16 @@ DECLARE_CONVERTER_FACTORY ( LdfAcdDigiCnv );
 //const ICnvFactory& LdfAcdDigiCnvFactory = s_factory;
 
 LdfAcdDigiCnv::LdfAcdDigiCnv(ISvcLocator* svc)
-: Converter(TEST_StorageType, CLID_AcdDigi, svc)
+: LdfBaseCnv(classID(), svc) 
+//: Converter(TEST_StorageType, CLID_AcdDigi, svc)
 {
     // Here we associate this converter with the /Event/Digi/AcdDigiCol path on the TDS.
+    declareObject("/Event/Digi/AcdDigiCol", objType(), "PASS");
     m_path="/Event/Digi/AcdDigiCol";
 }
 
 
+/*
 StatusCode LdfAcdDigiCnv::initialize(){
     return Converter::initialize();
 }
@@ -102,6 +106,7 @@ StatusCode LdfAcdDigiCnv::initialize(){
 StatusCode LdfAcdDigiCnv::finalize() {
     return Converter::finalize();
 }
+*/
 
 bool LdfAcdDigiCnv::createAcdDigi(Event::AcdDigiCol*& digiCol, unsigned int bitWord, int face, int offset, int maxRow, int maxCol) {
     bool created = false;

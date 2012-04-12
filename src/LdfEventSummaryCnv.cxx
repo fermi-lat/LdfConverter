@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.9 2011/12/12 20:53:01 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSummaryCnv.cxx,v 1.8.742.1 2012/01/30 18:50:41 heather Exp $
 //
 // Description:
 //      LdfEventSummaryCnv is the concrete converter for the event header on the TDS /Event
@@ -16,8 +16,9 @@
 #include "Event/TopLevel/Event.h"
 #include "ldfReader/data/LatData.h"
 #include "LdfEvent/EventSummaryData.h"
+#include "LdfBaseCnv.h"
 
-class  LdfEventSummaryCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  LdfEventSummaryCnv : public LdfBaseCnv //public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfEventSummaryCnv>;
@@ -40,11 +41,13 @@ public:
     static const CLID&         classID()     {return CLID_LdfEventSummaryData;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_LdfEventSummaryData;}
@@ -73,12 +76,15 @@ private:
 DECLARE_CONVERTER_FACTORY ( LdfEventSummaryCnv );
 
 
-LdfEventSummaryCnv::LdfEventSummaryCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_LdfEventSummaryData, svc)
+LdfEventSummaryCnv::LdfEventSummaryCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
+//Converter(TEST_StorageType, CLID_LdfEventSummaryData, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
     m_path = "/Event/EventSummary";
+    declareObject("/Event/EventSummary", objType(), "PASS");
 }
 
+/*
 StatusCode LdfEventSummaryCnv::initialize() 
 {
     StatusCode status = Converter::initialize();
@@ -90,6 +96,7 @@ StatusCode LdfEventSummaryCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 StatusCode LdfEventSummaryCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {
