@@ -26,7 +26,7 @@
  * @brief Takes data from the TDS to test reading from EBF files
  *
  * @author Heather Kelly
- * $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.11.624.1 2010/10/08 16:34:25 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/test/test_LdfConverterAlg.cxx,v 1.11.712.1 2012/01/30 18:50:41 heather Exp $
  */
 
 class test_LdfConverterAlg : public Algorithm

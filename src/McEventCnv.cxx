@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/McEventCnv.cxx,v 1.1.656.1 2010/10/08 16:34:25 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/McEventCnv.cxx,v 1.2 2011/12/12 20:53:01 heather Exp $
 //
 // Description:
 // Concrete converter for the McEvent header on the TDS /Event/MC
@@ -17,10 +17,13 @@
 #include "GaudiKernel/IDataProviderSvc.h"
 #include "GaudiKernel/ObjectVector.h"
 
-// RCS Id for identification of object version
-static const char* rcsid = "$Id: McEventCnv.cxx,v 1.1.656.1 2010/10/08 16:34:25 heather Exp $";
+#include "LdfBaseCnv.h"
 
-class  McEventCnv : public Converter //virtual public IGlastCnv, public Converter 
+// RCS Id for identification of object version
+static const char* rcsid = "$Id: McEventCnv.cxx,v 1.1.744.2 2012/04/12 18:13:07 heather Exp $";
+
+class  McEventCnv : public LdfBaseCnv
+//public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<McEventCnv>;
@@ -43,11 +46,14 @@ public:
     static const CLID&         classID()     {return CLID_McEvent;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_McEvent;}
@@ -69,11 +75,17 @@ private:
 
 };
 
+DECLARE_CONVERTER_FACTORY ( McEventCnv );
 
-McEventCnv::McEventCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_McEvent, svc)
+
+McEventCnv::McEventCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
+//Converter(TEST_StorageType, CLID_McEvent, svc)
 {
   m_path = "/Event/MC";
+  declareObject("/Event/MC", objType(), "PASS");
 }
+
+/*
 StatusCode McEventCnv::initialize() 
 {
     StatusCode status = Converter::initialize();
@@ -85,6 +97,7 @@ StatusCode McEventCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 
 StatusCode McEventCnv::createObj(IOpaqueAddress* pAddress, DataObject*& refpObject)

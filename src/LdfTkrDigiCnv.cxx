@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfTkrDigiCnv.cxx,v 1.3.654.1 2010/10/08 16:34:25 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTkrDigiCnv.cxx,v 1.4 2011/12/12 20:53:01 heather Exp $
 //
 // Description:
 //      LdfTkrDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -15,9 +15,11 @@
 
 #include "ldfReader/data/LatData.h"
 #include "Event/Digi/TkrDigi.h"
+#include "LdfBaseCnv.h"
 
 
-class  LdfTkrDigiCnv : public Converter //virtual public IGlastCnv, public Converter 
+class  LdfTkrDigiCnv : public LdfBaseCnv
+//public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfTkrDigiCnv>;
@@ -40,11 +42,13 @@ public:
     static const CLID&         classID()     {return CLID_TkrDigi;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_TkrDigi;}
@@ -72,11 +76,14 @@ private:
 //const ICnvFactory& MCEventCnvFactory = s_factory;
 DECLARE_CONVERTER_FACTORY ( LdfTkrDigiCnv );
 
-LdfTkrDigiCnv::LdfTkrDigiCnv(ISvcLocator* svc)  : Converter(TEST_StorageType, CLID_TkrDigi, svc)
+LdfTkrDigiCnv::LdfTkrDigiCnv(ISvcLocator* svc)  : LdfBaseCnv(classID(), svc)
+//: Converter(TEST_StorageType, CLID_TkrDigi, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
+    declareObject("/Event/Digi/TkrDigiCol", objType(), "PASS");
     m_path = "/Event/Digi/TkrDigiCol";
 }
+/*
 StatusCode LdfTkrDigiCnv::initialize() 
 {
     StatusCode status = Converter::initialize();
@@ -88,6 +95,7 @@ StatusCode LdfTkrDigiCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 StatusCode LdfTkrDigiCnv::createObj(IOpaqueAddress* , 
                                     DataObject*& refpObject) {

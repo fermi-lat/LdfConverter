@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfTimeCnv.cxx,v 1.1.1.1.656.1 2010/10/08 16:34:25 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTimeCnv.cxx,v 1.2 2011/12/12 20:53:01 heather Exp $
 //
 // Description:
 //      LdfTimeCnv is the concrete converter for the event header on the TDS /Event
@@ -16,7 +16,10 @@
 #include "ldfReader/data/LatData.h"
 #include "LdfEvent/LdfTime.h"
 
-class  LdfTimeCnv : public Converter //virtual public IGlastCnv, public Converter 
+#include "LdfBaseCnv.h"
+
+class  LdfTimeCnv : public LdfBaseCnv
+// public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<LdfTimeCnv>;
@@ -39,11 +42,14 @@ public:
     static const CLID&         classID()     {return CLID_LdfTime;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
+
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_LdfTime;}
@@ -71,12 +77,18 @@ private:
 //const ICnvFactory& MCEventCnvFactory = s_factory;
 DECLARE_CONVERTER_FACTORY ( LdfTimeCnv );
 
-
-LdfTimeCnv::LdfTimeCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_LdfTime, svc)
+LdfTimeCnv::LdfTimeCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
+//Converter(TEST_StorageType, CLID_LdfTime, svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
     m_path = "/Event/Time";
+    declareObject("/Event/Time", objType(), "PASS");
 }
+StatusCode LdfTimeCnv::initialize() 
+{
+    StatusCode status = Converter::initialize();
+
+/*
 StatusCode LdfTimeCnv::initialize() 
 {
     StatusCode status = Converter::initialize();
@@ -88,6 +100,7 @@ StatusCode LdfTimeCnv::finalize()
 {
     return Converter::finalize();
 }
+*/
 
 StatusCode LdfTimeCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {

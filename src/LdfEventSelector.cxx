@@ -1,5 +1,5 @@
 // File and Version Information:
-// $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfEventSelector.cxx,v 1.40 2011/12/12 20:53:01 heather Exp $
+// $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfEventSelector.cxx,v 1.39.18.2 2012/04/12 18:13:07 heather Exp $
 // 
 // Description:
 
@@ -528,6 +528,7 @@ StatusCode LdfEventSelector::setCriteria(const std::string& storageType) {
 StatusCode LdfEventSelector::next(Context& refCtxt, int /* jump */ ) const  {
     static bool lastEventFlag = false;
     MsgStream log(msgSvc(), name());
+    log << MSG::DEBUG << "Inside next" << endreq;
     // static counter for use when we want to skip to event N
     static unsigned long long counter = 0;
     static bool firstCall = true;

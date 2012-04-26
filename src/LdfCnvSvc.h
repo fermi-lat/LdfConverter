@@ -18,7 +18,7 @@ template <class TYPE> class SvcFactory;
  * access to the data and put it on the TDS.
  * Based on SICb service written by Markus Frank.
  *
- * $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/LdfCnvSvc.h,v 1.2.646.1 2010/10/08 16:34:25 heather Exp $
+ * $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCnvSvc.h,v 1.2.734.2 2012/04/12 18:13:07 heather Exp $
  */
 
 class LdfCnvSvc  : public ConversionSvc { //virtual public ConversionSvc, virtual public ILdfCnvSvc	{
@@ -34,6 +34,8 @@ public:
   virtual StatusCode initialize();
 
   virtual StatusCode finalize();
+
+  //virtual void loadConverter(DataObject*);
 
 // HMK these 2 are not in the CalibXmlCnvSvc
   //virtual StatusCode updateServiceState(IOpaqueAddress* pAddress);

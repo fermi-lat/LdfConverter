@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/LdfConverter/src/AdfEventCnv.cxx,v 1.3.624.1 2010/10/08 16:34:24 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/AdfEventCnv.cxx,v 1.4 2011/12/12 20:53:00 heather Exp $
 //
 // Description:
 //      AdfEventCnv is the concrete converter for the event header on the TDS /Event
@@ -21,7 +21,10 @@
 #include "AdfEvent/AncillaryWord.h"
 #include "ldfReader/data/LatData.h"
 
-class  AdfEventCnv : public Converter //virtual public IGlastCnv, public Converter 
+#include "LdfBaseCnv.h"
+
+class  AdfEventCnv :public LdfBaseCnv
+// public Converter //virtual public IGlastCnv, public Converter 
 {
 
   friend class CnvFactory<AdfEventCnv>;
@@ -44,11 +47,13 @@ public:
     static const CLID&         classID()     {return CLID_AncillaryEvent;}
     static const unsigned char storageType() {return TEST_StorageType;}
 
+/*
     /// Initialize the converter
     virtual StatusCode initialize();
 
     /// Initialize the converter
     virtual StatusCode finalize();
+*/
 
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_AncillaryEvent;}
@@ -77,24 +82,22 @@ private:
 DECLARE_CONVERTER_FACTORY ( AdfEventCnv );
 
 
-// Instantiation of a static factory class used by clients to create
-// instances of this service
-//static CnvFactory<AdfEventCnv> s_factory;
-//const ICnvFactory& AdfEventCnvFactory = s_factory;
-
-AdfEventCnv::AdfEventCnv(ISvcLocator* svc) : Converter(TEST_StorageType, CLID_AncillaryEvent, svc)
+AdfEventCnv::AdfEventCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
+//Converter(TEST_StorageType, CLID_AncillaryEvent, svc)
 //: LdfBaseCnv(classID(), svc)
 {
     // Here we associate this converter with the /Event path on the TDS.
-  //  declareObject("/Event/AncillaryEvent/AdfEvent", objType(), "PASS");
+    declareObject("/Event/AncillaryEvent/AdfEvent", objType(), "PASS");
     m_path = "/Event/AncillaryEvent/AdfEvent";
     return;
 }
 
 AdfEventCnv::~AdfEventCnv() { }
 
+/*
 StatusCode AdfEventCnv::initialize() { return Converter::initialize(); }
 StatusCode AdfEventCnv::finalize() { return Converter::finalize(); }
+*/
 
 StatusCode AdfEventCnv::createObj(IOpaqueAddress* , 
                                DataObject*& refpObject) {
