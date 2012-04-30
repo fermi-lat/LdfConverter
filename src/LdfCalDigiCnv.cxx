@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.7 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCalDigiCnv.cxx,v 1.8 2012/04/26 04:01:37 heather Exp $
 //
 // Description:
 //      LdfCalDigiCnv is the concrete converter for the event header on the TDS /Event
@@ -49,55 +49,6 @@ public:
     /// Initialize the converter
     virtual StatusCode finalize();
 */
-    /// Retrieve the class type of objects the converter produces. 
-    virtual const CLID& objType() const {return CLID_CalDigi;}
-
-    /// Retrieve the class type of the data store the converter uses.
-    // MSF: Masked to generate compiler error due to interface change
-    virtual long repSvcType() const {return Converter::i_repSvcType();}
-
-    /// Create the transient representation of an object.
-    virtual StatusCode createObj(IOpaqueAddress* pAddress,DataObject*& refpObject);
-
-    /// Methods to set and return the path in TDS for output of this converter
-  //  virtual void setPath(const std::string& path) {m_path = path;}
-    virtual const std::string& getPath() const    {return m_path;}
-
-private:
-
-    std::string m_path;
-
-};
-
-class  LdfCalDigiCnv : public Converter //virtual public IGlastCnv, public Converter 
-{
-
-  friend class CnvFactory<LdfCalDigiCnv>;
-
-
-protected:
-
-    /**
-        Constructor for this converter
-        @param svc a ISvcLocator interface to find services
-        @param clid the type of object the converter is able to convert
-    */
-    LdfCalDigiCnv(ISvcLocator* svc);
-
-    virtual ~LdfCalDigiCnv() { };
-
-public:
-    /// Query interfaces of Interface
-    //virtual StatusCode queryInterface(const InterfaceID& riid, void** ppvInterface);
-    static const CLID&         classID()     {return CLID_CalDigi;}
-    static const unsigned char storageType() {return TEST_StorageType;}
-
-    /// Initialize the converter
-    virtual StatusCode initialize();
-
-    /// Initialize the converter
-    virtual StatusCode finalize();
-
     /// Retrieve the class type of objects the converter produces. 
     virtual const CLID& objType() const {return CLID_CalDigi;}
 

@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCnvSvc.cxx,v 1.3 2011/12/12 20:53:00 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfCnvSvc.cxx,v 1.4 2012/04/26 04:01:37 heather Exp $
 //
 // Description:
 //      LdfCnvSvc is the GLAST converter service.
@@ -178,7 +178,7 @@ private:
 static const InterfaceID IID_ILdfBaseCnv("ILdfBaseCnv", 1 , 0); 
 
 // RCS Id for identification of object version
-static const char* rcsid = "$Id: LdfCnvSvc.cxx,v 1.2.734.2 2012/04/12 18:13:07 heather Exp $";
+static const char* rcsid = "$Id: LdfCnvSvc.cxx,v 1.4 2012/04/26 04:01:37 heather Exp $";
 //template <class TYPE> class SvcFactory; HMK Not sure we need this now 2010
 
 DECLARE_SERVICE_FACTORY( LdfCnvSvc );
@@ -290,17 +290,17 @@ StatusCode LdfCnvSvc::finalize()     {
     return status;
 }
 
-//StatusCode LdfCnvSvc::declareObject(const ILdfCnvSvc::Leaf& leaf)   {
+StatusCode LdfCnvSvc::declareObject(const ILdfCnvSvc::Leaf& leaf)   {
     // Purpose and Method:  Callback from each of the individual converters that allows
     //  association of TDS path and converter.
-//    Leaf* ll = new Leaf(leaf);
-//    std::pair<LeafMap::iterator, bool> p = m_leaves.insert(LeafMap::value_type( leaf.path, ll) );
-//    if( p.second )    {
-//        return StatusCode::SUCCESS;
-//    }
-//    delete ll;
-//    return StatusCode::FAILURE;/
-//}
+    Leaf* ll = new Leaf(leaf);
+    std::pair<LeafMap::iterator, bool> p = m_leaves.insert(LeafMap::value_type( leaf.path, ll) );
+    if( p.second )    {
+        return StatusCode::SUCCESS;
+    }
+    delete ll;
+    return StatusCode::FAILURE;
+}
 
 /*void LdfCnvSvc::loadConverter(DataObject* pObject) {
     if (pObject) {
@@ -468,10 +468,10 @@ StatusCode LdfCnvSvc::updateServiceState(IOpaqueAddress* pAddress)    {
 }
 
 StatusCode LdfCnvSvc::queryInterface(const InterfaceID& riid, void** ppvInterface)  {
-//    if ( IID_ILdfBaseCnv == riid )  {
-//        *ppvInterface = (ILdfCnvSvc*)this;
-//    }
-//    else  {
+    if ( IID_ILdfBaseCnv == riid )  {
+        *ppvInterface = (ILdfCnvSvc*)this;
+    }
+    else  {
         // Interface is not directly availible: try out a base class
         return ConversionSvc::queryInterface(riid, ppvInterface);
    }

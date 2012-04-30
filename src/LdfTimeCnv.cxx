@@ -1,5 +1,5 @@
 // File and Version Information:
-//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTimeCnv.cxx,v 1.2 2011/12/12 20:53:01 heather Exp $
+//      $Header: /nfs/slac/g/glast/ground/cvs/LdfConverter/src/LdfTimeCnv.cxx,v 1.3 2012/04/26 04:01:38 heather Exp $
 //
 // Description:
 //      LdfTimeCnv is the concrete converter for the event header on the TDS /Event
@@ -84,9 +84,9 @@ LdfTimeCnv::LdfTimeCnv(ISvcLocator* svc) : LdfBaseCnv(classID(), svc)
     m_path = "/Event/Time";
     declareObject("/Event/Time", objType(), "PASS");
 }
-StatusCode LdfTimeCnv::initialize() 
-{
-    StatusCode status = Converter::initialize();
+//StatusCode LdfTimeCnv::initialize() 
+//{
+//    StatusCode status = Converter::initialize();
 
 /*
 StatusCode LdfTimeCnv::initialize() 
